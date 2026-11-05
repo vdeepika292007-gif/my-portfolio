@@ -113,7 +113,7 @@ export const portfolioData = {
     name: "Deepika V",
     role: "Computer Science (Data Science) Student",
     shortBio:
-      "3rd-year engineering student at JNNCE Shivamogga with a 9.29 CGPA. I write code in Python, Java, C, and JavaScript, build web apps, and work with SQL and data analytics.",
+      "3rd-year engineering student at JNNCE Shivamogga with a 9.29 CGPA. I build responsive web applications using HTML, CSS, JavaScript, and Bootstrap, and work with Python, SQL, and data analytics.",
     statusText: "Open for Internships & Projects",
     location: "Shivamogga, Karnataka, India",
     profileImage: null,
@@ -183,13 +183,14 @@ export const portfolioData = {
     },
     {
       title: "Web Development",
-      description: "Building responsive web pages and user interfaces.",
+      description: "Building responsive web pages and interactive user interfaces.",
       iconName: "Layout",
       skills: [
-        { name: "HTML5 & CSS3", level: "Layouts & responsive styling", isPrimary: true },
+        { name: "HTML5", level: "Semantic structure & forms", isPrimary: true },
+        { name: "CSS3", level: "Flexbox, Grid & animations", isPrimary: true },
+        { name: "JavaScript (ES6+)", level: "DOM manipulation & event handling", isPrimary: true },
+        { name: "Bootstrap 5", level: "Responsive grid & components", isPrimary: true },
         { name: "Tailwind CSS", level: "Utility-first design", isPrimary: true },
-        { name: "React", level: "Component-based interfaces", isPrimary: true },
-        { name: "Node.js", level: "Basic server development", isPrimary: true },
       ],
     },
     {

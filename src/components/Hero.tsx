@@ -64,6 +64,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenPlaceholderModal }) => {
               </span>
             </div>
 
+            {/* Core Tech Stack Badges */}
+            <div className="flex flex-wrap items-center gap-1.5 pt-0.5 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+              <span className="text-slate-400 dark:text-slate-500">Tech Stack:</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-teal-700 dark:text-teal-300 font-semibold border border-slate-200 dark:border-slate-700/60">HTML5</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-teal-700 dark:text-teal-300 font-semibold border border-slate-200 dark:border-slate-700/60">CSS3</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-teal-700 dark:text-teal-300 font-semibold border border-slate-200 dark:border-slate-700/60">JavaScript (ES6+)</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-teal-700 dark:text-teal-300 font-semibold border border-slate-200 dark:border-slate-700/60">Bootstrap 5</span>
+              <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700/60">Python</span>
+            </div>
+
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-3">
               <a
