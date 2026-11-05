@@ -1,20 +1,3 @@
-/**
- * =======================================================================
- * Deepika V - Portfolio Data Configuration File
- * =======================================================================
- * 
- * Edit this file to customize:
- * 1. Your personal details, bio, and social links
- * 2. Education, college name, and degree specialization
- * 3. Technical skills and categorized tags
- * 4. Project details, GitHub links, and live demo URLs
- * 5. Experience, internship dates, and certificate links
- * 6. Certifications and achievements
- * 
- * All placeholders are marked with brackets like "[Your College Name]"
- * or have 'isPlaceholder: true' so you can quickly identify what to update.
- */
-
 export interface PersonalInfo {
   name: string;
   role: string;
@@ -22,7 +5,7 @@ export interface PersonalInfo {
   statusText: string;
   location: string;
   phone?: string;
-  profileImage: string | null; // Set to null to use initials avatar, or put image path like '/profile.jpg'
+  profileImage: string | null;
   resumeUrl: string;
 }
 
@@ -50,7 +33,7 @@ export interface SkillCategory {
   iconName: string;
   skills: Array<{
     name: string;
-    level: string; // e.g. "Intermediate", "Working Knowledge", "Learning"
+    level: string;
     isPrimary?: boolean;
   }>;
 }
@@ -128,59 +111,58 @@ export const portfolioData = {
   // 1. Personal Information
   personal: {
     name: "Deepika V",
-    role: "Data Scientist • Data Science Undergraduate",
+    role: "Computer Science (Data Science) Student",
     shortBio:
-      "Passionate Data Science student at Jawaharlal Nehru New College of Engineering, Shivamogga (9.4 CGPA). Possessing a strong foundation in data science concepts, algorithms, machine learning modeling, and analytical problem-solving.",
-    statusText: "Open to Internships & Opportunities",
+      "3rd-year engineering student at JNNCE Shivamogga with a 9.29 CGPA. I write code in Python, Java, C, and JavaScript, build web apps, and work with SQL and data analytics.",
+    statusText: "Open for Internships & Projects",
     location: "Shivamogga, Karnataka, India",
-    phone: "+91 8217248630",
     profileImage: null,
     resumeUrl: "./Deepika_V_Resume.pdf",
   } as PersonalInfo,
 
   // 2. About Me Section
   about: {
-    currentStatus: "Third-year engineering student (5th Semester)",
-    academicLevel: "3rd Year Undergraduate • 5th Semester",
-    college: "Jawaharlal Nehru New College of Engineering, Shivamogga",
+    currentStatus: "3rd Year Engineering Student (5th Semester)",
+    academicLevel: "Undergraduate • 5th Semester",
+    college: "Jawaharlal Nehru New College of Engineering (JNNCE)",
     degree: "Bachelor of Engineering (B.E.)",
     specialization: "Computer Science & Engineering (Data Science)",
     graduationYear: "2028",
-    cgpa: "9.4 / 10.0",
+    cgpa: "9.29 / 10.0",
     interests: [
-      "Data Science & Analytics",
-      "Artificial Intelligence & Machine Learning",
-      "Software Engineering",
-      "Full-Stack Web Development",
-      "Cybersecurity Awareness",
+      "Web Development",
+      "Data Analytics",
+      "Machine Learning",
+      "SQL Databases",
+      "Algorithmic Problem Solving",
     ],
     careerGoal:
-      "To gain practical industry exposure in data-driven methodologies, develop robust software solutions, and secure impactful roles in software development or data science.",
+      "To work as a software engineer or data analyst where I can write clean code, solve real problems, and learn from experienced engineers.",
     detailedBio: [
-      "I am a passionate Data Science engineering student at Jawaharlal Nehru New College of Engineering, Shivamogga (Class of 2024–2028), maintaining an exceptional 9.4 CGPA. I serve as the Vice-chairperson for the Indian Society for Technical Education (ISTE) and an active technical member of TechForge.",
-      "My journey bridges core software development with data analytics—crafting responsive applications, running exploratory data analyses, and training machine learning models to solve practical challenges. I actively engage in hackathons including the Smart India Hackathon (college selection for SmartLivestock AI farm portal) and Techzone Nationals 2K25 (AI Olympics).",
-      "I am eager to contribute to real-world engineering teams, collaborate with seasoned mentors, and apply data science to solve meaningful societal and business problems.",
+      "I am currently in my 5th semester studying Computer Science with a focus on Data Science at JNNCE Shivamogga (class of 2024–2028), holding a 9.29 CGPA.",
+      "Alongside my coursework, I serve as Vice-chairperson for our college chapter of ISTE (Indian Society for Technical Education) and participate in TechForge. I also reached the college selection stage in Smart India Hackathon 2025 and participated in the Techzone AI Olympics.",
+      "Recently, I completed a 1-month virtual internship in Data Science & Analytics at Future Interns, working on sales data analysis, customer churn tracking, and marketing conversions with Python and Power BI.",
     ],
     quickStats: [
       {
-        value: "9.4",
-        label: "Overall CGPA",
-        detail: "Academic Excellence",
+        value: "9.29",
+        label: "CGPA",
+        detail: "5th Semester",
       },
       {
-        value: "5th Sem",
-        label: "Current Standing",
-        detail: "B.E. CSE (Data Science)",
+        value: "2028",
+        label: "Graduation",
+        detail: "Class of 2028",
       },
       {
-        value: "Vice Chair",
-        label: "ISTE Core Member",
-        detail: "Technical Leadership",
+        value: "ISTE",
+        label: "Vice-chair",
+        detail: "Student Leadership",
       },
       {
-        value: "Data Intern",
-        label: "Industry Experience",
-        detail: "Completed at Future Interns",
+        value: "1 Month",
+        label: "Data Intern",
+        detail: "Future Interns",
       },
     ],
   } as AboutInfo,
@@ -189,133 +171,73 @@ export const portfolioData = {
   skillsCategories: [
     {
       title: "Programming Languages",
-      description: "Core languages used for software development, logic building, and algorithms.",
+      description: "Languages I use for writing logic, algorithms, and applications.",
       iconName: "Code2",
       skills: [
-        { name: "Python", level: "Data Science & Projects", isPrimary: true },
-        { name: "Java", level: "Core OOP Foundation", isPrimary: true },
-        { name: "C", level: "Foundational Programming", isPrimary: true },
-        { name: "JavaScript (ES6+)", level: "Web & Scripting", isPrimary: true },
-        { name: "TypeScript", level: "Modern Frontend Stack", isPrimary: true },
+        { name: "Python", level: "Primary language for data & scripts", isPrimary: true },
+        { name: "Java", level: "OOP & data structures", isPrimary: true },
+        { name: "C", level: "Core foundation & algorithms", isPrimary: true },
+        { name: "JavaScript", level: "Web apps & DOM scripting", isPrimary: true },
+        { name: "TypeScript", level: "Typed frontend projects", isPrimary: true },
       ],
     },
     {
-      title: "Frontend Development",
-      description: "Building responsive, modern, and accessible web user interfaces.",
+      title: "Web Development",
+      description: "Building responsive web pages and user interfaces.",
       iconName: "Layout",
       skills: [
-        { name: "HTML5", level: "Strong Foundation", isPrimary: true },
-        { name: "CSS3 / Tailwind CSS", level: "Active Project Use", isPrimary: true },
-        { name: "React", level: "Component Architecture", isPrimary: true },
+        { name: "HTML5 & CSS3", level: "Layouts & responsive styling", isPrimary: true },
+        { name: "Tailwind CSS", level: "Utility-first design", isPrimary: true },
+        { name: "React", level: "Component-based interfaces", isPrimary: true },
+        { name: "Node.js", level: "Basic server development", isPrimary: true },
       ],
     },
     {
-      title: "Backend & Databases",
-      description: "Data modeling, RESTful services, server-side logic, and storage.",
+      title: "Databases & Backend",
+      description: "Storing and managing data with relational and document databases.",
       iconName: "Database",
       skills: [
-        { name: "Node.js", level: "Project Experience", isPrimary: true },
-        { name: "PHP", level: "Project Experience (MindVault)", isPrimary: true },
-        { name: "MySQL", level: "Relational Modeling", isPrimary: true },
-        { name: "MongoDB", level: "NoSQL Working Knowledge" },
-        { name: "PostgreSQL", level: "Relational Queries & Schemas" },
+        { name: "MySQL", level: "Tables, queries & constraints", isPrimary: true },
+        { name: "PHP", level: "Backend scripting & sessions (MindVault)", isPrimary: true },
+        { name: "PostgreSQL", level: "SQL queries & schemas" },
+        { name: "MongoDB", level: "Document storage basics" },
       ],
     },
     {
-      title: "Data Analytics & Tools",
-      description: "Data wrangling, exploratory analysis, visualization, and reporting.",
+      title: "Data Tools & Analysis",
+      description: "Cleaning datasets, summarizing metrics, and generating reports.",
       iconName: "BarChart3",
       skills: [
-        { name: "Python (Data Stack)", level: "Internship & Project Use", isPrimary: true },
-        { name: "Pandas", level: "Data Cleaning & Wrangling", isPrimary: true },
-        { name: "Matplotlib", level: "Statistical Visualizations", isPrimary: true },
-        { name: "Power BI", level: "Interactive BI Dashboards", isPrimary: true },
-        { name: "Microsoft Excel", level: "Formulas & Pivot Tables", isPrimary: true },
+        { name: "Pandas", level: "Data filtering & transformation", isPrimary: true },
+        { name: "Matplotlib & Seaborn", level: "Charts & statistical plots", isPrimary: true },
+        { name: "Power BI", level: "Dashboards & reporting", isPrimary: true },
+        { name: "Excel", level: "Formulas & pivot tables", isPrimary: true },
+        { name: "Scikit-Learn", level: "Classification & baseline models", isPrimary: true },
       ],
     },
   ] as SkillCategory[],
 
   skillsNote:
-    "Note: These represent my current learning and project technologies. I focus on developing practical, foundational skills and continuously expanding my technical competence through hands-on practice.",
+    "These are the tools and languages I actively use across my college coursework, side projects, and internship tasks.",
 
   // 4. Featured Projects
   projects: [
     {
-      id: "mind-vault",
-      title: "MindVault",
-      subtitle: "Personal Knowledge Management System (PHP / MySQL)",
-      category: "Full-Stack",
-      description:
-        "A personal knowledge management application that enables users to systematically capture, organize, search, and retrieve notes, thoughts, and ideas in a secure environment.",
-      architectureHighlights:
-        "Engineered with a PHP backend and relational MySQL schema, implementing robust user authentication, secure session handling, prepared statements for SQL injection prevention, and full data persistence.",
-      keyFeatures: [
-        "Secure user authentication with session management & password hashing",
-        "Full CRUD operations for categorizing personal notes and documents",
-        "Fast keyword search and topic-based filtering",
-        "Structured MySQL schema ensuring referential data integrity",
-      ],
-      technologies: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Apache"],
-      githubUrl: "https://github.com/vdeepika292007-gif/MindVault",
-      demoUrl: "https://github.com/vdeepika292007-gif/MindVault#readme",
-      isPlaceholderLinks: false,
-    },
-    {
-      id: "multi-vault",
-      title: "Multi Vault",
-      subtitle: "Modern Knowledge Management & Graph Application",
-      category: "Full-Stack",
-      description:
-        "A separate, modern architectural implementation of the MindVault concept, built to explore contemporary frontend and backend paradigms for deeply interconnected knowledge work.",
-      architectureHighlights:
-        "Architected with a component-driven frontend and decoupled API structure, featuring note organization, instant multi-tag queries, daily journaling workflows, and dynamic knowledge graph visualizations.",
-      keyFeatures: [
-        "Interactive knowledge graph connecting interrelated thoughts & tags",
-        "Structured daily journaling system with automated date logging",
-        "Multi-tag filtering and real-time client-side search",
-        "Modular TypeScript/React component architecture",
-      ],
-      technologies: ["React", "TypeScript", "Node.js", "Tailwind CSS", "Data Structures"],
-      githubUrl: "https://github.com/vdeepika292007-gif/Multi-Vault-New-Version",
-      demoUrl: "https://github.com/vdeepika292007-gif/Multi-Vault-New-Version#readme",
-      isPlaceholderLinks: false,
-    },
-    {
-      id: "campus-placement",
-      title: "Campus Placement Management System",
-      subtitle: "Web Portal for Recruitment Drives & Applications",
-      category: "Full-Stack",
-      description:
-        "A centralized web application designed to streamline campus placement activities for students, department coordinators, and recruiting company administrators.",
-      architectureHighlights:
-        "Facilitates placement drive announcements, student application submissions, eligibility criteria filtering, and automated interview scheduling coordination.",
-      keyFeatures: [
-        "Student portal with profile and resume submission workflow",
-        "Company placement drive listings with eligibility criteria checks",
-        "Admin dashboard to track application statuses and placement statistics",
-        "Structured relational data management for academic records",
-      ],
-      technologies: ["React", "Node.js", "Express", "MySQL", "REST APIs"],
-      githubUrl: "https://github.com/vdeepika292007-gif/campus-placement-management-system",
-      demoUrl: "https://github.com/vdeepika292007-gif/campus-placement-management-system#readme",
-      isPlaceholderLinks: false,
-    },
-    {
       id: "heart-disease-prediction",
       title: "Heart Disease Prediction",
-      subtitle: "Machine Learning Risk Assessment Model",
+      subtitle: "Machine learning model to predict cardiac risk",
       category: "Data Analytics & ML",
       description:
-        "A predictive machine learning project focused on evaluating cardiovascular disease indicators from patient health and clinical metrics to aid early diagnosis.",
+        "A Python project that evaluates patient clinical metrics (age, blood pressure, cholesterol, heart rate) to predict heart disease risk.",
       architectureHighlights:
-        "Utilizes Python and statistical learning libraries to perform data cleaning, handle missing values, analyze feature correlation, and train predictive classification models.",
+        "Uses Pandas for data cleaning, explores feature correlations, and trains classification models with Scikit-Learn.",
       keyFeatures: [
-        "Comprehensive Exploratory Data Analysis (EDA) on clinical health indicators",
-        "Feature scaling, encoding, and correlation matrix visualizations",
-        "Model evaluation comparing accuracy, precision, recall, and ROC-AUC curves",
-        "Clear visualization of risk indicators using Matplotlib & Seaborn",
+        "Data cleaning and handling of missing health indicators",
+        "Feature correlation plots using Matplotlib and Seaborn",
+        "Model evaluation using accuracy, precision, and recall metrics",
+        "Interactive risk calculator simulated in this portfolio",
       ],
-      technologies: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn", "Jupyter"],
+      technologies: ["Python", "Pandas", "Scikit-Learn", "Matplotlib", "Seaborn"],
       githubUrl: "https://github.com/vdeepika292007-gif/heart-disease-prediction",
       demoUrl: "https://github.com/vdeepika292007-gif/heart-disease-prediction#readme",
       isPlaceholderLinks: false,
@@ -323,21 +245,81 @@ export const portfolioData = {
     {
       id: "code-debug-game",
       title: "Code Debug Game",
-      subtitle: "Interactive Algorithmic Debugging Practice Platform",
+      subtitle: "Gamified browser challenge to test debugging skills",
       category: "Interactive",
       description:
-        "An engaging, gamified web application designed to help developers and students practice spotting code bugs, understanding logic errors, and improving debugging intuition.",
+        "An interactive web game where players read buggy code snippets, choose the right fix, and verify it against test cases.",
       architectureHighlights:
-        "Built with dynamic state management to render progressive coding challenges across different difficulty tiers, tracking time, attempts, and accuracy scores.",
+        "Built with vanilla JavaScript and dynamic DOM updates, featuring instant test execution and a score counter.",
       keyFeatures: [
-        "Interactive challenge levels with real-time feedback on user fixes",
-        "Hint mechanisms and syntax-highlighted code inspection",
-        "Scoring system based on completion speed and minimal attempts",
-        "Responsive game UI designed for accessible learning",
+        "Hands-on debugging challenges across different concepts",
+        "Instant pass/fail feedback on code fixes",
+        "XP scoring system based on correct choices",
+        "Playable demo integrated directly on the home page",
       ],
-      technologies: ["JavaScript", "HTML5", "CSS3 / Tailwind", "DOM API", "Game Logic"],
+      technologies: ["JavaScript", "HTML5", "CSS3", "DOM API"],
       githubUrl: "https://github.com/vdeepika292007-gif/Code-Debug-Game",
       demoUrl: "https://github.com/vdeepika292007-gif/Code-Debug-Game#readme",
+      isPlaceholderLinks: false,
+    },
+    {
+      id: "campus-placement",
+      title: "Campus Placement Management System",
+      subtitle: "Web portal for student applications and recruitment drives",
+      category: "Full-Stack",
+      description:
+        "A web application that simplifies college placement drives by allowing students to register and coordinators to manage applications.",
+      architectureHighlights:
+        "Frontend built in React with an Express backend and MySQL database for storing student records and company drive details.",
+      keyFeatures: [
+        "Student registration and application workflow",
+        "Company drive listings with eligibility criteria",
+        "Admin panel for checking student status and reports",
+        "Relational MySQL tables for students and placements",
+      ],
+      technologies: ["React", "Node.js", "Express", "MySQL", "REST APIs"],
+      githubUrl: "https://github.com/vdeepika292007-gif/campus-placement-management-system",
+      demoUrl: "https://github.com/vdeepika292007-gif/campus-placement-management-system#readme",
+      isPlaceholderLinks: false,
+    },
+    {
+      id: "mind-vault",
+      title: "MindVault",
+      subtitle: "Personal note-taking web app with user authentication",
+      category: "Full-Stack",
+      description:
+        "A secure personal knowledge app where users can create, organize, edit, and search their study notes and ideas.",
+      architectureHighlights:
+        "Built with PHP and MySQL, featuring password hashing, secure session management, and prepared SQL statements.",
+      keyFeatures: [
+        "User registration and login with session cookies",
+        "Full CRUD operations for notes and folders",
+        "Keyword search across note titles and content",
+        "Relational schema preventing unauthorized note access",
+      ],
+      technologies: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3"],
+      githubUrl: "https://github.com/vdeepika292007-gif/MindVault",
+      demoUrl: "https://github.com/vdeepika292007-gif/MindVault#readme",
+      isPlaceholderLinks: false,
+    },
+    {
+      id: "multi-vault",
+      title: "Multi Vault",
+      subtitle: "Modern note app with interconnected tag graphs",
+      category: "Full-Stack",
+      description:
+        "A modern reimagining of MindVault built with React and TypeScript, adding tag filtering and a visual knowledge graph.",
+      architectureHighlights:
+        "Component-based architecture with client-side state management for connecting related notes through tags.",
+      keyFeatures: [
+        "Interactive graph linking related notes and tags",
+        "Daily log editor with timestamping",
+        "Fast client-side search and tag filtering",
+        "Written in TypeScript with clean components",
+      ],
+      technologies: ["React", "TypeScript", "Node.js", "Tailwind CSS"],
+      githubUrl: "https://github.com/vdeepika292007-gif/Multi-Vault-New-Version",
+      demoUrl: "https://github.com/vdeepika292007-gif/Multi-Vault-New-Version#readme",
       isPlaceholderLinks: false,
     },
   ] as Project[],
@@ -348,29 +330,29 @@ export const portfolioData = {
       id: "future-interns-da",
       role: "Data Science & Analytics Intern",
       company: "Future Interns",
-      period: "September 2026 – October 2026",
-      location: "Virtual / Remote Internship",
+      period: "Sep 2026 – Oct 2026",
+      location: "Virtual / Remote",
       isPlaceholderPeriod: false,
       description:
-        "Completed a 1-month intensive internship program in Data Science & Analytics (CIN: FIT/SEP26/DS23421). Applied statistical methods, exploratory data analysis, and dashboard design to deliver actionable business intelligence across three core project initiatives:",
-      technologies: ["Python", "Pandas", "Matplotlib", "Power BI", "Data Cleaning", "Data Visualization"],
+        "Completed a 1-month internship (CIN: FIT/SEP26/DS23421) focused on practical data analysis using Python and Power BI across three core tasks:",
+      technologies: ["Python", "Pandas", "Matplotlib", "Power BI", "Excel"],
       projectAreas: [
         {
-          title: "Business Sales Performance Analysis",
+          title: "1. Business Sales Analytics",
           description:
-            "Analyzed multi-dimensional sales datasets to track revenue trajectories, identify top revenue-generating product segments, evaluate regional patterns, and highlight seasonal sales spikes.",
+            "Analyzed sales records by product category and region to identify top revenue drivers and monthly trends.",
           repoUrl: "https://github.com/vdeepika292007-gif/future-interns-task-1-business-sales-analytics",
         },
         {
-          title: "Customer Retention and Churn Analysis",
+          title: "2. Customer Churn Analysis",
           description:
-            "Conducted behavioral and demographic analysis on customer cohorts to uncover primary drivers of churn, customer lifetime trends, and actionable retention intervention points.",
+            "Explored customer demographics and usage metrics to identify reasons behind customer churn.",
           repoUrl: "https://github.com/vdeepika292007-gif/future_interns_ds_task2",
         },
         {
-          title: "Marketing Campaign Conversion Analysis",
+          title: "3. Marketing Conversion Analysis",
           description:
-            "Evaluated the conversion efficiency of promotional and marketing campaigns across channels, assessing cost-per-acquisition, engagement rates, and ROI metrics.",
+            "Evaluated campaign conversion rates and acquisition costs across promotional channels.",
           repoUrl: "https://github.com/vdeepika292007-gif/future_interns_ds_task3",
         },
       ],
@@ -382,53 +364,39 @@ export const portfolioData = {
   // 6. Education
   education: [
     {
-      institution: "Jawaharlal Nehru New College of Engineering, Shivamogga",
+      institution: "Jawaharlal Nehru New College of Engineering (JNNCE), Shivamogga",
       degree: "Bachelor of Engineering (B.E.)",
       specialization: "Computer Science & Engineering (Data Science)",
       period: "2024 – 2028 (Currently in 5th Semester)",
-      status: "5th Semester • 9.4 CGPA",
-      location: "Shivamogga, Karnataka, India",
+      status: "5th Semester • 9.29 CGPA",
+      location: "Shivamogga, Karnataka",
       coursework: [
-        "Data Structures and Algorithms",
-        "Object-Oriented Programming (OOP)",
-        "Basics of Data Analysis",
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming (Java/C++)",
         "Database Management Systems (DBMS)",
+        "Basics of Data Analysis",
         "Artificial Intelligence & Machine Learning",
-        "Leadership: Vice-chairperson of ISTE",
-        "Technical Club Member of TechForge",
       ],
       isPlaceholder: false,
     },
     {
-      institution: "PACE UM PU College",
-      degree: "Pre University Course (PUC)",
-      specialization: "Science / PCMB",
+      institution: "PACE UM PU College, Shivamogga",
+      degree: "Pre-University Course (PUC)",
+      specialization: "Science (PCMB)",
       period: "2022 – 2024",
-      status: "Grade: 96.8% (Distinction)",
-      location: "Shivamogga, Karnataka, India",
-      coursework: [
-        "Physics",
-        "Chemistry",
-        "Mathematics",
-        "Biology / Computer Science",
-        "Academic Excellence",
-      ],
+      status: "Score: 96.8% (Distinction)",
+      location: "Shivamogga, Karnataka",
+      coursework: ["Physics", "Chemistry", "Mathematics", "Biology"],
       isPlaceholder: false,
     },
     {
-      institution: "Podar International School",
-      degree: "10th Grade Secondary Education",
+      institution: "Podar International School, Shivamogga",
+      degree: "10th Standard (Secondary School)",
       specialization: "General Academics",
-      period: "2022",
-      status: "Grade: 89.1%",
-      location: "Shivamogga, Karnataka, India",
-      coursework: [
-        "Mathematics",
-        "Science & Technology",
-        "English",
-        "Social Sciences",
-        "Foundational Computing",
-      ],
+      period: "Completed 2022",
+      status: "Score: 89.1%",
+      location: "Shivamogga, Karnataka",
+      coursework: ["Mathematics", "Science", "English", "Social Science"],
       isPlaceholder: false,
     },
   ] as EducationItem[],
@@ -437,12 +405,12 @@ export const portfolioData = {
   certifications: [
     {
       id: "future-interns-cert",
-      title: "Certificate of Completion — Data Science & Analytics",
+      title: "Data Science & Analytics Internship Certificate",
       issuer: "Future Interns (CIN: FIT/SEP26/DS23421)",
-      date: "16 October 2026",
+      date: "Oct 2026",
       cin: "FIT/SEP26/DS23421",
       description:
-        "Verified certificate awarded to Deepika V for completing the intensive internship in Data Science & Analytics (September 2026 – October 2026). Certified ISO 9001 & MSME registered.",
+        "Certificate of completion for the 1-month Data Science & Analytics internship (Sep 2026 – Oct 2026).",
       credentialUrl: "./certificates/future-interns-certificate.jpg",
       imageUrl: "./certificates/future-interns-certificate.jpg",
       isPlaceholder: false,
@@ -450,52 +418,32 @@ export const portfolioData = {
     {
       id: "future-interns-lor",
       title: "Letter of Recommendation (LOR)",
-      issuer: "Future Interns (CIN: FIT/SEP26/DS23421)",
-      date: "16 October 2026",
+      issuer: "Future Interns",
+      date: "Oct 2026",
       cin: "FIT/SEP26/DS23421",
       description:
-        "Official recommendation from Sujan Kumar C (Program Coordinator) recognizing Deepika V (JNNCE Shivamogga) for exemplary professionalism, consistency, and analytical execution.",
+        "Recommendation letter from Sujan Kumar C (Program Coordinator) commending consistent performance and task completion.",
       credentialUrl: "./certificates/future-interns-lor.jpg",
       imageUrl: "./certificates/future-interns-lor.jpg",
       isPlaceholder: false,
     },
     {
       id: "smart-india-hackathon",
-      title: "Smart India Hackathon 2025 — College Level Selection",
-      issuer: "Ministry of Education / SIH 2025",
+      title: "Smart India Hackathon 2025 (College Selection)",
+      issuer: "JNNCE / SIH 2025",
       date: "2025",
       description:
-        "Selected at college level for ideating and developing SmartLivestock, an AI-based agricultural and livestock farm monitoring portal.",
+        "Selected at college level for SmartLivestock, a smart farm monitoring project.",
       credentialUrl: "#",
       isPlaceholder: false,
     },
     {
       id: "techzone-ai-olympics",
       title: "Techzone Nationals 2K25 (AI Olympics)",
-      issuer: "National-Level AI Competition",
+      issuer: "National-Level Competition",
       date: "2025",
       description:
-        "National-level participant representing JNNCE in AI modeling, problem-solving heuristics, and machine learning challenges.",
-      credentialUrl: "#",
-      isPlaceholder: false,
-    },
-    {
-      id: "bangalore-hackathon",
-      title: "Bangalore Idea Hackathon & Cyber Safe Campus",
-      issuer: "Idea Innovation & Cyber Safety",
-      date: "2024–2025",
-      description:
-        "Participated in idea development, product pitching, MSME entrepreneurship awareness, and cybersecurity safety initiatives.",
-      credentialUrl: "#",
-      isPlaceholder: false,
-    },
-    {
-      id: "udemy-datascience",
-      title: "Data Analytics, Data Science & Machine Learning",
-      issuer: "Udemy (Comprehensive Program)",
-      date: "Ongoing",
-      description:
-        "Advanced professional course covering exploratory data analysis, predictive statistical models, and production machine learning pipelines.",
+        "Participated in machine learning challenges and problem-solving events.",
       credentialUrl: "#",
       isPlaceholder: false,
     },
@@ -504,11 +452,10 @@ export const portfolioData = {
   // 8. Contact & Socials
   contact: {
     email: "vdeepika292007@gmail.com",
-    phone: "+91 8217248630",
     linkedinUrl: "https://www.linkedin.com/in/deepikav8/",
     githubUrl: "https://github.com/vdeepika292007-gif",
     messageText:
-      "I am actively seeking internship opportunities, collaborative coding projects, and conversations with fellow developers and analysts. Feel free to reach out via email, phone, or connect with me on LinkedIn!",
+      "If you would like to discuss an internship, collaboration, or project, please feel free to send me a message or connect on LinkedIn.",
     isPlaceholderLinks: false,
   } as ContactInfo,
 };

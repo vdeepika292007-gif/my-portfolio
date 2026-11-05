@@ -4,27 +4,37 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Deepika V | Engineering Student & Aspiring Software Developer</title>
-    <meta name="description" content="Personal portfolio of Deepika V, a third-year engineering student passionate about software development, web technologies, and data analytics." />
+    <title>Deepika V | Portfolio</title>
+    <meta name="description" content="Deepika V is a 3rd-year Computer Science (Data Science) student at JNNCE Shivamogga, building web apps and working with data." />
     <meta name="author" content="Deepika V" />
-    <meta name="keywords" content="Deepika V, Portfolio, Software Developer, Data Analyst, Web Development, React, Python, Engineering Student" />
+    <meta name="keywords" content="Deepika V, Portfolio, Computer Science, Data Science, JNNCE, Shivamogga, Python, React, Web Development" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Deepika V | Engineering Student & Aspiring Software Developer" />
-    <meta property="og:description" content="Explore projects, skills, and data analytics work by Deepika V." />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Deepika V | Engineering Student & Aspiring Software Developer" />
-    <meta property="twitter:description" content="Explore projects, skills, and data analytics work by Deepika V." />
+    <meta property="og:title" content="Deepika V | Portfolio" />
+    <meta property="og:description" content="Projects, coursework, and internship work by Deepika V." />
 
-    <!-- Google Fonts: Plus Jakarta Sans -->
+    <!-- Unique Typography: Space Grotesk (headings), DM Sans (body), JetBrains Mono (code/mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Instant Theme Detection Script -->
+    <script>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+            document.documentElement.classList.remove('dark');
+          } else {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#070a13] text-slate-100 font-sans antialiased selection:bg-violet-600/30 selection:text-violet-200">
+  <body class="bg-[#faf9f6] text-slate-800 dark:bg-[#0e1117] dark:text-slate-100 font-sans antialiased selection:bg-teal-500/20 selection:text-teal-700 dark:selection:text-teal-300">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

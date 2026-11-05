@@ -5,49 +5,163 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
   }
 
   body {
-    background-color: #070a13;
-    color: #e2e8f0;
-    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
-  /* Custom subtle scrollbar */
+  /* Minimalist unique background pattern */
+  .bg-canvas {
+    background-color: #faf9f6;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .dark .bg-canvas {
+    background-color: #0b0e14;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Subtle minimalist scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #090d16;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #252e42;
-    border-radius: 4px;
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #3b4662;
+    background: #94a3b8;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
   }
 }
 
 @layer utilities {
-  .text-glow-violet {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.45);
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
   }
-  .box-glow-violet {
-    box-shadow: 0 0 35px -5px rgba(139, 92, 246, 0.2);
+}
+
+/* Clinical ECG Monitor animations */
+@keyframes ecg-scroll {
+  0% {
+    transform: translateX(0);
   }
-  .glass-card {
-    background: rgba(17, 24, 39, 0.65);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  100% {
+    transform: translateX(-50%);
   }
-  .glass-card-hover {
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-ecg-scroll {
+  animation: ecg-scroll 3s linear infinite;
+}
+
+@keyframes pulse-heart {
+  0%, 100% {
+    transform: scale(1);
   }
-  .glass-card-hover:hover {
-    transform: translateY(-4px);
-    border-color: rgba(139, 92, 246, 0.4);
-    box-shadow: 0 12px 30px -10px rgba(139, 92, 246, 0.25);
+  14% {
+    transform: scale(1.2);
   }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.12);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: pulse-heart 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  transform-origin: center;
+}
+
+/* Animated Bug Creature & Game Objects */
+@keyframes wiggle-bug {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(-6deg) translateY(-2px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(0);
+  }
+  75% {
+    transform: rotate(6deg) translateY(-2px);
+  }
+}
+
+.animate-bug-wiggle {
+  animation: wiggle-bug 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes bug-crawl {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  48% {
+    transform: translateX(18px) scaleX(1);
+  }
+  50% {
+    transform: translateX(18px) scaleX(-1);
+  }
+  98% {
+    transform: translateX(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+.animate-bug-crawl {
+  animation: bug-crawl 5s ease-in-out infinite;
+}
+
+@keyframes float-xp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-28px) scale(1);
+  }
+}
+
+.animate-float-xp {
+  animation: float-xp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes terminal-cursor {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-terminal-cursor {
+  animation: terminal-cursor 0.8s step-end infinite;
 }

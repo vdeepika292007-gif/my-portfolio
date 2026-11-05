@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown, Sparkles } from 'lucide-react';
+import { Menu, X, FileDown, Sun, Moon } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { useTheme } from '../hooks/useTheme';
 
 interface NavbarProps {
   onOpenPlaceholderModal: (title: string, message: string) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenPlaceholderModal }) => {
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   const navLinks = [
+    { name: 'Playground', href: '#interactive-lab' },
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
@@ -22,14 +25,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPlaceholderModal }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
 
-      // Determine active section
-      const sections = ['contact', 'education', 'experience', 'projects', 'skills', 'about', 'hero'];
+      const sections = ['contact', 'education', 'experience', 'projects', 'skills', 'about', 'interactive-lab', 'hero'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -51,53 +49,52 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPlaceholderModal }) => {
   const handleResumeClick = () => {
     if (portfolioData.personal.resumeUrl.includes('placeholder')) {
       onOpenPlaceholderModal(
-        'Resume Placeholder Active',
-        'Downloading the placeholder resume template. To replace this with your actual resume, simply place your PDF file in the "public" folder as "resume.pdf" and update the path in "src/data/portfolioData.ts"!'
+        'Resume Active',
+        'Your resume PDF is located in public/Deepika_V_Resume.pdf.'
       );
     }
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
         isScrolled
-          ? 'bg-dark-950/85 backdrop-blur-md border-b border-violet-900/20 py-3 shadow-lg shadow-black/20'
+          ? 'bg-[#faf9f6]/90 dark:bg-[#0b0e14]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 py-3 shadow-sm'
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
           <a
             href="#hero"
-            className="group flex items-center gap-2.5 text-slate-100 hover:text-white transition"
+            className="flex items-center gap-3 text-slate-900 dark:text-slate-100 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center font-bold text-white shadow-md shadow-violet-700/20 group-hover:scale-105 transition-transform">
-              <span className="text-sm tracking-wider">DV</span>
+            <div className="w-9 h-9 rounded-md bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 flex items-center justify-center font-mono font-bold text-xs tracking-wider transition-transform group-hover:scale-105">
+              DV
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-base tracking-tight group-hover:text-violet-300 transition-colors">
+              <span className="font-heading font-semibold text-sm tracking-tight text-slate-900 dark:text-white">
                 {portfolioData.personal.name}
               </span>
-              <span className="text-[11px] text-violet-400 font-medium tracking-wide flex items-center gap-1">
-                <Sparkles className="w-2.5 h-2.5" />
-                Portfolio
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                JNNCE • 5th Sem
               </span>
             </div>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 bg-dark-900/60 p-1.5 rounded-full border border-slate-800/80 backdrop-blur-sm">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/80 px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-800">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
+                  className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
                     isActive
-                      ? 'bg-violet-600/20 text-violet-300 border border-violet-500/30 shadow-sm'
-                      : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800/50'
+                      ? 'bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-400 shadow-xs font-semibold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -106,68 +103,78 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenPlaceholderModal }) => {
             })}
           </nav>
 
-          {/* Right Action: Download Resume */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Actions: Theme Toggle + Resume */}
+          <div className="flex items-center gap-2">
+            {/* Dark / Light Mode Switch */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark and light theme"
+              className="p-2 rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition"
+              title={theme === 'dark' ? 'Switch to Light theme' : 'Switch to Dark theme'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700" />
+              )}
+            </button>
+
+            {/* Resume Button */}
             <a
               href={portfolioData.personal.resumeUrl}
               download="Deepika_V_Resume.pdf"
               onClick={handleResumeClick}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-lg bg-violet-600/10 text-violet-300 border border-violet-500/30 hover:bg-violet-600 hover:text-white transition-all shadow-sm hover:shadow-violet-600/25"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-teal-600 hover:bg-teal-700 text-white dark:bg-teal-500 dark:hover:bg-teal-400 dark:text-slate-950 text-xs font-semibold transition"
             >
-              <FileDown className="w-4 h-4" />
+              <FileDown className="w-3.5 h-3.5" />
               <span>Resume</span>
             </a>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/80 transition"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-dark-950/95 backdrop-blur-xl border-b border-slate-800 px-4 pt-3 pb-6 animate-fade-in">
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-4 py-2.5 rounded-lg text-sm font-medium transition ${
-                    isActive
-                      ? 'bg-violet-600/20 text-violet-300 border border-violet-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            <div className="pt-2 mt-2 border-t border-slate-800">
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mt-3 p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111620] shadow-md space-y-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 text-xs font-medium rounded text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                {link.name}
+              </a>
+            ))}
+            <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <a
                 href={portfolioData.personal.resumeUrl}
                 download="Deepika_V_Resume.pdf"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  handleResumeClick();
-                }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-violet-600 text-white font-medium text-sm hover:bg-violet-700 transition"
+                onClick={handleResumeClick}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-teal-600 text-white text-xs font-medium"
               >
-                <FileDown className="w-4 h-4" />
-                <span>Download Resume</span>
+                <FileDown className="w-3.5 h-3.5" />
+                Download Resume
               </a>
+              <button
+                onClick={toggleTheme}
+                className="inline-flex items-center gap-1 text-xs text-slate-600 dark:text-slate-400 px-2 py-1"
+              >
+                {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
+                <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
+              </button>
             </div>
-          </nav>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </header>
   );
 };

@@ -32,7 +32,6 @@ All content is conveniently located in **`src/data/portfolioData.ts`**. You do n
 - [ ] **Profile Photo**: Place your photo into `public/profile.jpg` and set `profileImage: "./profile.jpg"` in `portfolioData.ts`.
 - [x] **Location**: Shivamogga, Karnataka, India
 - [x] **Resume**: Real PDF Resume (`Deepika_V_Resume.pdf`) uploaded and connected to download buttons
-- [x] **Phone**: `+91 8217248630` integrated into contact channels
 
 ### 2. Academic & Education
 - [x] **College Name**: Jawaharlal Nehru New College of Engineering, Shivamogga (JNNCE)

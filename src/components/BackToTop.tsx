@@ -6,11 +6,7 @@ export const BackToTop: React.FC = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', toggleVisibility, { passive: true });
@@ -29,10 +25,10 @@ export const BackToTop: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      aria-label="Scroll back to top"
-      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-violet-600 text-white shadow-xl shadow-violet-600/30 hover:bg-violet-700 hover:scale-110 active:scale-95 transition-all duration-200 border border-violet-400/40"
+      aria-label="Scroll to top"
+      className="fixed bottom-6 right-6 z-40 p-2.5 rounded-md bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 shadow-md hover:opacity-90 transition font-mono text-xs border border-slate-700 dark:border-slate-300"
     >
-      <ArrowUp className="w-5 h-5" />
+      <ArrowUp className="w-4 h-4" />
     </button>
   );
 };

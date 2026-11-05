@@ -5,9 +5,6 @@ import {
   Database,
   BarChart3,
   Layers,
-  Sparkles,
-  CheckCircle,
-  AlertCircle,
 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
@@ -18,158 +15,109 @@ export const Skills: React.FC = () => {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case 'Code2':
-        return <Code2 className="w-5 h-5 text-violet-400" />;
+        return <Code2 className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
       case 'Layout':
-        return <Layout className="w-5 h-5 text-indigo-400" />;
+        return <Layout className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
       case 'Database':
-        return <Database className="w-5 h-5 text-purple-400" />;
+        return <Database className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
       case 'BarChart3':
-        return <BarChart3 className="w-5 h-5 text-violet-400" />;
+        return <BarChart3 className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
       default:
-        return <Layers className="w-5 h-5 text-violet-400" />;
+        return <Layers className="w-4 h-4 text-teal-600 dark:text-teal-400" />;
     }
   };
 
   const filteredCategories =
     selectedCategory === 'all'
       ? skillsCategories
-      : skillsCategories.filter(
-          (cat) => cat.title.toLowerCase().includes(selectedCategory.toLowerCase())
+      : skillsCategories.filter((cat) =>
+          cat.title.toLowerCase().includes(selectedCategory.toLowerCase())
         );
 
   return (
-    <section id="skills" className="py-20 relative bg-dark-900/50 border-t border-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 border-t border-slate-200 dark:border-slate-800/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-950/70 border border-violet-500/30 text-violet-300 text-xs font-semibold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            Technical Toolkit
+        <div className="max-w-2xl mx-auto text-center mb-10 space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-teal-50/50 dark:bg-teal-950/30 text-teal-800 dark:text-teal-300 text-xs font-mono">
+            <span>Tools & Languages</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-300">Skills</span>
+          <h2 className="text-3xl font-heading font-bold text-slate-900 dark:text-white tracking-tight">
+            Technical Skills
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
-            Languages, frameworks, databases, and analytics tools applied across my coursework, projects, and internship.
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            Technologies I use for coursework, projects, and data tasks.
           </p>
         </div>
 
         {/* Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition ${
-              selectedCategory === 'all'
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
-                : 'bg-dark-850 text-slate-300 hover:bg-dark-800 border border-slate-800'
-            }`}
-          >
-            All Categories
-          </button>
-          <button
-            onClick={() => setSelectedCategory('programming')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition ${
-              selectedCategory === 'programming'
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
-                : 'bg-dark-850 text-slate-300 hover:bg-dark-800 border border-slate-800'
-            }`}
-          >
-            Programming
-          </button>
-          <button
-            onClick={() => setSelectedCategory('frontend')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition ${
-              selectedCategory === 'frontend'
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
-                : 'bg-dark-850 text-slate-300 hover:bg-dark-800 border border-slate-800'
-            }`}
-          >
-            Frontend
-          </button>
-          <button
-            onClick={() => setSelectedCategory('backend')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition ${
-              selectedCategory === 'backend'
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
-                : 'bg-dark-850 text-slate-300 hover:bg-dark-800 border border-slate-800'
-            }`}
-          >
-            Backend & Databases
-          </button>
-          <button
-            onClick={() => setSelectedCategory('analytics')}
-            className={`px-4 py-1.5 rounded-full text-xs font-semibold transition ${
-              selectedCategory === 'analytics'
-                ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30'
-                : 'bg-dark-850 text-slate-300 hover:bg-dark-800 border border-slate-800'
-            }`}
-          >
-            Data Analytics
-          </button>
+          {[
+            { id: 'all', label: 'All' },
+            { id: 'programming', label: 'Languages' },
+            { id: 'web', label: 'Web' },
+            { id: 'database', label: 'Databases' },
+            { id: 'data', label: 'Data & Analytics' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setSelectedCategory(tab.id)}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+                selectedCategory === tab.id
+                  ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 shadow-xs'
+                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* Skills Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Skill Category Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredCategories.map((category, index) => (
             <div
               key={index}
-              className="glass-card glass-card-hover rounded-2xl p-6 border border-slate-800 flex flex-col justify-between"
+              className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111620] p-6 shadow-xs space-y-4"
             >
-              <div>
-                {/* Header with Icon */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2.5 rounded-xl bg-violet-950/60 border border-violet-500/20">
-                    {getCategoryIcon(category.iconName)}
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white leading-tight">
-                      {category.title}
-                    </h3>
-                  </div>
+              <div className="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800/80">
+                <div className="p-2 rounded-md bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-900/40">
+                  {getCategoryIcon(category.iconName)}
                 </div>
-
-                <p className="text-xs text-slate-400 mb-5 leading-relaxed">
-                  {category.description}
-                </p>
-
-                {/* Skills Badges */}
-                <div className="space-y-2.5">
-                  {category.skills.map((skill, idx) => (
-                    <div
-                      key={idx}
-                      className="p-2.5 rounded-xl bg-dark-950/70 border border-slate-800/80 hover:border-violet-500/30 flex items-center justify-between transition group"
-                    >
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="w-3.5 h-3.5 text-violet-400 group-hover:text-violet-300" />
-                        <span className="text-xs font-medium text-slate-200 group-hover:text-white">
-                          {skill.name}
-                        </span>
-                      </div>
-                      <span className="text-[10px] text-slate-400 bg-dark-850 px-2 py-0.5 rounded border border-slate-800/60">
-                        {skill.level}
-                      </span>
-                    </div>
-                  ))}
+                <div>
+                  <h3 className="font-heading font-semibold text-base text-slate-900 dark:text-white">
+                    {category.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    {category.description}
+                  </p>
                 </div>
               </div>
 
-              {/* Category Footer Indicator */}
-              <div className="mt-6 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500">
-                <span>{category.skills.length} Technologies</span>
-                <span className="text-violet-400 font-medium">In Active Practice</span>
+              {/* Skills list */}
+              <div className="space-y-2">
+                {category.skills.map((skill, sIdx) => (
+                  <div
+                    key={sIdx}
+                    className="flex items-center justify-between p-2 rounded-md bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800/60 text-xs"
+                  >
+                    <span className="font-medium text-slate-900 dark:text-slate-200 font-mono">
+                      {skill.name}
+                    </span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                      {skill.level}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Candid Disclaimer / Learning Note */}
-        <div className="mt-10 max-w-3xl mx-auto p-4 rounded-xl bg-violet-950/20 border border-violet-900/30 flex items-start gap-3">
-          <AlertCircle className="w-4 h-4 text-violet-400 shrink-0 mt-0.5" />
-          <p className="text-xs text-slate-300 leading-relaxed">
-            <strong className="text-violet-300 font-semibold">Honest Technical Positioning: </strong>
-            {skillsNote}
-          </p>
-        </div>
+        {/* Note */}
+        <p className="text-center text-xs text-slate-500 font-mono mt-8">
+          {skillsNote}
+        </p>
       </div>
     </section>
   );
