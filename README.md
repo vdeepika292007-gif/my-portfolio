@@ -1,175 +1,138 @@
 # Deepika V — Personal Portfolio Website
 
-A modern, responsive personal developer portfolio website designed for **Deepika V**, a third-year engineering student, aspiring software developer, and data analyst.
+A fast, lightweight, and modern personal portfolio website built with pure **HTML5**, **CSS3**, **Vanilla JavaScript (ES6+)**, and **Bootstrap 5.3**.
 
-Built with **React**, **TypeScript**, **Tailwind CSS**, and **Vite**, featuring a dark theme, subtle violet accents, smooth scrolling, interactive project cards, and a centralized configuration file for updating information.
-
----
-
-## 🌟 Key Features
-
-- **Dark Theme with Violet Accents**: Modern aesthetic with glassmorphism, responsive typography, and glowing gradients.
-- **Centralized Data File**: All personal details, project descriptions, skills, experience, and links are managed in a single file: [`src/data/portfolioData.ts`](./src/data/portfolioData.ts).
-- **Interactive Project Showcase**: Filter projects by categories (*All*, *Full-Stack*, *Data Analytics & ML*, *Interactive*), with architecture highlights, tech tags, and code/demo links.
-- **Data Analyst Internship Spotlight**: Details the 3 core initiatives completed during the Future Interns internship:
-  1. Business Sales Performance Analysis
-  2. Customer Retention and Churn Analysis
-  3. Marketing Campaign Conversion Analysis
-- **Clear Placeholder Indicators**: No false or fabricated college names, links, or credentials. Any item requiring your personal input is styled with a distinct badge and opens an informative guide dialog when clicked.
-- **Reliable Contact System**: Clean contact form that validates user input and triggers a pre-filled `mailto:` message or one-click copy draft—no fake submit buttons.
-- **Resume & Profile Integration**: Includes a download button with a placeholder PDF and an elegant avatar placeholder ready for your photo.
-- **Back-to-Top Navigation**: Smooth floating button and responsive mobile navigation drawer.
+Live Website: **[https://vdeepika292007-gif.github.io/my-portfolio/](https://vdeepika292007-gif.github.io/my-portfolio/)**
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Key Highlights & Technology Stack
 
-### 1. Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed (version 18+ recommended).
-
-### 2. Install Dependencies
-```bash
-npm install
-```
-
-### 3. Run Development Server Locally
-```bash
-npm run dev
-```
-Open [http://localhost:5173](http://localhost:5173) in your browser to view your website with hot module replacement (instant preview as you edit).
-
-### 4. Build for Production
-```bash
-npm run build
-```
-This generates an optimized static production bundle in the `dist/` directory.
-
-### 5. Preview Production Build Locally
-```bash
-npm run preview
-```
+- **Zero Build Tools**: No Node.js, `npm`, Vite, TypeScript, or Tailwind dependencies required.
+- **Pure Front-End Web Standards**:
+  - **HTML5**: Semantic, accessible markup.
+  - **CSS3**: Custom variables, responsive design, dark/light theme tokens, and animations (`css/style.css`).
+  - **Bootstrap 5.3.3**: Grid system, layout utilities, modals, and responsive components via CDN.
+  - **Vanilla JavaScript (ES6+)**: Pure client-side logic with zero external JS frameworks (`js/app.js`).
+  - **Bootstrap Icons & Google Fonts**: Space Grotesk, DM Sans, and JetBrains Mono.
+- **Double-Click & Run**: Works directly by opening `index.html` in any web browser or via static hosting.
 
 ---
 
-## 🛠️ How to Customize Your Information
+## 🌟 Sections & Interactive Features
 
-You do **not** need to touch multiple component files. All your data lives in one single file:
-
-📁 **[`src/data/portfolioData.ts`](./src/data/portfolioData.ts)**
-
-### 1. Replace Profile Photo
-1. Save your photograph inside the `public/` folder as `profile.jpg` (or `.png`).
-2. Open [`src/data/portfolioData.ts`](./src/data/portfolioData.ts).
-3. Find `portfolioData.personal` and change:
-   ```ts
-   profileImage: "./profile.jpg",
-   ```
-
-### 2. Replace Resume PDF
-1. Place your actual resume PDF into the `public/` folder (e.g. `public/Deepika_V_Resume.pdf`).
-2. In [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), update:
-   ```ts
-   resumeUrl: "./Deepika_V_Resume.pdf",
-   ```
-
-### 3. Update College and Education Details
-In [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), locate `about` and `education`:
-- Replace `[Your College / University Name]` with your actual college name.
-- Replace `[Your Branch / Specialization]` with your branch (e.g., `Computer Science and Engineering`).
-- Replace `[Your CGPA / Percentage]` with your academic score.
-
-### 4. Update Project Repository & Demo Links
-In [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), find the `projects` array:
-- Add your actual GitHub URLs to `githubUrl`.
-- Add your live deployment URLs to `demoUrl`.
-- Set `isPlaceholderLinks: false` when your links are live.
-
-### 5. Update Contact Information
-In [`src/data/portfolioData.ts`](./src/data/portfolioData.ts), find `contact`:
-- `email`: replace with your active email (e.g. `deepika@gmail.com`).
-- `linkedinUrl`: replace with your LinkedIn profile link.
-- `githubUrl`: replace with your GitHub profile link.
-
----
-
-## 🌐 Free Deployment Options
-
-### Option A: GitHub Pages (Recommended)
-1. Initialize git and commit your files:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit of Deepika V Portfolio"
-   ```
-2. Create a repository on GitHub (e.g., `portfolio` or `deepika-portfolio`).
-3. Link your local repository and push:
-   ```bash
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git branch -M main
-   git push -u origin main
-   ```
-4. Install `gh-pages`:
-   ```bash
-   npm install -D gh-pages
-   ```
-5. Add this deploy script to `package.json`:
-   ```json
-   "scripts": {
-     "deploy": "npm run build && gh-pages -d dist"
-   }
-   ```
-6. Run `npm run deploy`. Your site will be live at `https://<your-username>.github.io/<repo-name>/`.
-*(Note: `vite.config.ts` is already configured with `base: './'`, so your relative links will work out of the box!)*
-
-### Option B: Vercel (Fastest & Simplest)
-1. Push your code to GitHub.
-2. Sign in to [Vercel](https://vercel.com/) with GitHub.
-3. Click **"Add New Project"** and select your repository.
-4. Leave settings as default (Framework Preset: **Vite**).
-5. Click **Deploy**. Your portfolio is instantly live with a free `.vercel.app` domain and automatic SSL.
-
-### Option C: Netlify
-1. Run `npm run build` locally.
-2. Go to [Netlify Drop](https://app.netlify.com/drop).
-3. Drag and drop the `dist/` folder. Your portfolio is online in seconds!
+1. **Header & Navigation**:
+   - Fixed responsive navbar with smooth scrolling to sections.
+   - Dark & Light theme switcher with automatic preference persistence in `localStorage`.
+   - Direct Resume download button.
+2. **Hero Section**:
+   - Monogram avatar badge, status indicator ("Available for internships & collaborations").
+   - Academic headline: *Computer Science & Engineering (Data Science) Student at JNNCE Shivamogga, 5th Sem, 9.29 CGPA, Class of 2028*.
+   - Quick CTAs to Interactive Playground, Projects, and Resume.
+3. **Interactive Playground**:
+   - **Heart Disease ML Risk Calculator**: Dynamic logistic regression probability calculation based on clinical metrics (Age, Blood Pressure, Cholesterol, Max Heart Rate, Chest Pain type, Exercise Angina) with circular SVG gauge, clinical zones, SHAP feature attributions, and one-click patient presets (Healthy vs. High Risk).
+   - **Code Debug Game**: Interactive challenge runner with animated "Buggy" mascot, speech bubbles, real-time code vs. diff inspection, step-by-step test runner with latency timings, and floating XP points.
+4. **About Me**:
+   - Academic narrative, key metrics (9.29 CGPA, 5th Sem, ISTE Vice-Chairperson, Class of 2028), and academic history.
+5. **Technical Skills**:
+   - Categorized by Languages, Web Development, Machine Learning & Data, Tools & Platforms, and Databases.
+   - Dynamic tab filtering (*All*, *Languages*, *Web*, *Data & ML*, *Tools*).
+6. **Featured Projects**:
+   - 5 projects with category filters (*All*, *Data Science & ML*, *Full-Stack / Web*, *Interactive*):
+     1. Heart Disease Prediction System (ML / Scikit-Learn)
+     2. Code Debug Game (Interactive JavaScript / Web)
+     3. Campus Placement Management System (Python / SQL / Web)
+     4. MindVault (Personal Knowledge Base)
+     5. Multi-Vault (Multi-category Secure Store)
+   - Live repository and documentation links for each project.
+7. **Experience**:
+   - Data Science & Analytics Internship at **Future Interns** (Sep 2026 – Oct 2026).
+   - Detailed breakdown of 3 projects:
+     - Task 1: Business Sales Performance Analytics
+     - Task 2: Customer Retention and Churn Modeling
+     - Task 3: Marketing Campaign Conversion Analysis
+8. **Education**:
+   - **B.E. in Computer Science & Engineering (Data Science)** — Jawaharlal Nehru New College of Engineering (JNNCE), Shivamogga (2022–2026 / Class of 2028), CGPA: 9.29 / 10.0.
+   - **Pre-University (12th / PUC)** — DVS Independent PU College (94.6%).
+9. **Certifications & Credentials**:
+   - Future Interns Certificate of Completion (CIN: `FIT/SEP26/DS23421`).
+   - Future Interns Letter of Recommendation (LOR) from Sujan Kumar C.
+   - One-click modal viewer to inspect credentials.
+10. **Contact Section**:
+    - Direct Email: `vdeepika292007@gmail.com` with one-click copy.
+    - LinkedIn: `https://www.linkedin.com/in/deepikav8/`.
+    - GitHub: `https://github.com/vdeepika292007-gif`.
+    - Interactive direct email composer generating formatted `mailto:` links.
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 MyPortfolio/
-├── public/
-│   ├── favicon.svg             # Custom "DV" monogram SVG icon
-│   └── resume-placeholder.pdf  # Placeholder resume file
-├── src/
-│   ├── components/
-│   │   ├── About.tsx           # Bio, academic info, and key highlights
-│   │   ├── BackToTop.tsx       # Floating smooth scroll-to-top button
-│   │   ├── Certifications.tsx  # Future Interns certificate & LOR
-│   │   ├── Contact.tsx         # Functional contact form & social channels
-│   │   ├── Education.tsx       # Degree & relevant coursework
-│   │   ├── Experience.tsx      # Future Interns Data Analyst internship
-│   │   ├── Footer.tsx          # Copyright & quick links
-│   │   ├── Hero.tsx            # Greeting, bio, CTAs, and avatar card
-│   │   ├── Icons.tsx           # GitHub and LinkedIn SVG components
-│   │   ├── Modal.tsx           # Placeholder guide modal dialog
-│   │   ├── Navbar.tsx          # Responsive navbar with mobile drawer
-│   │   └── Skills.tsx          # Categorized technical toolkit
-│   ├── data/
-│   │   └── portfolioData.ts    # ⭐ ALL PORTFOLIO CONTENT & PLACEHOLDERS
-│   ├── App.tsx                 # Root component orchestrator
-│   ├── index.css               # Tailwind CSS & custom animations
-│   └── main.tsx                # Application entry point
-├── index.html                  # HTML entry with metadata and Google Fonts
-├── package.json                # Project dependencies and build scripts
-├── tailwind.config.js          # Dark theme colors and styling rules
-├── tsconfig.json               # TypeScript configuration
-└── vite.config.ts              # Vite configuration with relative base path
+├── index.html                           # Main entry point (Bootstrap 5.3 + semantic HTML5)
+├── css/
+│   └── style.css                        # Custom styling, CSS variables, dark/light theme, keyframes
+├── js/
+│   └── app.js                           # Vanilla JS (Theme switch, ML model, Debug Game, filters)
+├── certificates/
+│   ├── future-interns-certificate.jpg   # Future Interns Certificate of Completion
+│   └── future-interns-lor.jpg           # Future Interns Letter of Recommendation
+├── Deepika_V_Resume.pdf                 # Deepika V's Curriculum Vitae
+├── favicon.svg                          # Custom DV monogram SVG favicon
+├── README.md                            # Project documentation and deployment guide
+└── PROJECT_PROGRESS.md                  # Detailed progress, architecture, and verification notes
 ```
 
 ---
 
-## 📄 License
-This project is open-source and free to use for personal portfolio development.
+## 💻 How to Run Locally
 
+Because this project uses standard web technologies with zero build steps:
+
+### Option 1: Direct File Opening
+Double-click `index.html` or open it with any web browser (Chrome, Edge, Firefox, Safari).
+
+### Option 2: VS Code Live Server
+1. Open the project folder in VS Code.
+2. Install the **Live Server** extension (by Ritwick Dey).
+3. Right-click `index.html` and select **"Open with Live Server"**.
+
+### Option 3: Simple Python HTTP Server (Optional)
+If you have Python installed:
+```bash
+# Python 3
+python -m http.server 8000
+```
+Then visit `http://localhost:8000` in your browser.
+
+---
+
+## 🌐 How to Deploy to GitHub Pages
+
+1. **Commit and Push Your Changes**:
+   ```bash
+   git add .
+   git commit -m "Convert portfolio to HTML5, CSS3, Vanilla JS, and Bootstrap 5.3"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to your repository on GitHub: `https://github.com/vdeepika292007-gif/my-portfolio`.
+   - Click on **Settings** > **Pages** (in the left sidebar).
+   - Under **Build and deployment**:
+     - **Source**: Select `Deploy from a branch`.
+     - **Branch**: Select `main` and folder `/ (root)`.
+     - Click **Save**.
+
+3. **Visit Your Live Website**:
+   Your website will be published in 1–2 minutes at:
+   **`https://vdeepika292007-gif.github.io/my-portfolio/`**
+
+---
+
+## 📄 License & Credits
+
+- Designed and developed by **Deepika V**.
+- Built with HTML5, CSS3, JavaScript (ES6+), and Bootstrap 5.3.
+- Free for personal and portfolio use.

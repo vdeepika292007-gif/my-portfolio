@@ -1,73 +1,80 @@
-# Project Progress & Customization Checklist
+# Project Progress & Conversion Documentation
 
-This document tracks the current development status of **Deepika V's Personal Portfolio Website**, outlining all implemented features, components, placeholder fields ready for customization, and recommended next steps.
-
----
-
-## 📊 Status Summary
-
-| Area | Status | Notes |
-|---|---|---|
-| **Project Setup & Tooling** | ✅ Completed | React 18, TypeScript, Tailwind CSS, Vite 6 configured & tested |
-| **Dark Theme & UI/UX** | ✅ Completed | Dark theme (`#070a13`), violet accents, glassmorphic cards |
-| **Hero Section** | ✅ Completed | Custom greeting, role, CTAs, avatar placeholder, status badge |
-| **About Me Section** | ✅ Completed | Natural narrative, academic details card, stats, interests |
-| **Technical Skills Section** | ✅ Completed | 4 categories, filter tabs, honest competence disclaimer |
-| **Featured Projects Section**| ✅ Completed | 5 projects, category filtering, architecture highlights |
-| **Experience Section** | ✅ Completed | Future Interns internship, 3 project areas, tech tags |
-| **Education Section** | ✅ Completed | Undergrad degree card, course list, editable placeholders |
-| **Certifications Section** | ✅ Completed | Future Interns cert, LOR card, add new credential slot |
-| **Contact Section** | ✅ Completed | Direct channels, copy email, reliable `mailto:` form |
-| **Navigation & Back to Top** | ✅ Completed | Sticky blurred navbar, mobile drawer, floating top button |
-| **Custom Favicon & SEO** | ✅ Completed | "DV" SVG monogram, OpenGraph & meta tags in `index.html` |
-| **Production Build** | ✅ Verified | Tested via `npm run build` with zero TypeScript/CSS errors |
+This document tracks the conversion and ongoing maintenance of **Deepika V's Personal Portfolio Website**.
 
 ---
 
-## 🛠️ What Deepika Needs to Customize
+## 📊 Status Summary: HTML5 + CSS3 + Vanilla JS + Bootstrap 5.3 Conversion
 
-All content is conveniently located in **`src/data/portfolioData.ts`**. You do not need to rewrite any component code.
-
-### 1. Personal & Hero Info
-- [ ] **Profile Photo**: Place your photo into `public/profile.jpg` and set `profileImage: "./profile.jpg"` in `portfolioData.ts`.
-- [x] **Location**: Shivamogga, Karnataka, India
-- [x] **Resume**: Real PDF Resume (`Deepika_V_Resume.pdf`) uploaded and connected to download buttons
-
-### 2. Academic & Education
-- [x] **College Name**: Jawaharlal Nehru New College of Engineering, Shivamogga (JNNCE)
-- [x] **Degree & Branch**: Bachelor of Engineering (B.E.) in Computer Science & Engineering (Data Science)
-- [x] **CGPA / Scores**: 9.4 / 10.0 (Distinction)
-- [x] **Pre-University (PUC)**: PACE UM PU College (Grade: 96.8%)
-- [x] **10th Grade**: Podar International School (Grade: 89.1%)
-- [x] **Leadership**: Vice-chairperson, Indian Society for Technical Education (ISTE) & TechForge Member
-- [x] **Current Standing**: 5th Semester (3rd Year)
-- [x] **Graduation Year**: Class of 2028
-
-### 3. Projects (GitHub Repositories)
-- [x] **MindVault**: `https://github.com/vdeepika292007-gif/MindVault`
-- [x] **Multi Vault**: `https://github.com/vdeepika292007-gif/Multi-Vault-New-Version`
-- [x] **Campus Placement Management System**: `https://github.com/vdeepika292007-gif/campus-placement-management-system`
-- [x] **Heart Disease Prediction**: `https://github.com/vdeepika292007-gif/heart-disease-prediction`
-- [x] **Code Debug Game**: `https://github.com/vdeepika292007-gif/Code-Debug-Game`
-
-### 4. Experience & Documents (Future Interns)
-- [x] **Task 1 (Business Sales Analytics)**: `https://github.com/vdeepika292007-gif/future-interns-task-1-business-sales-analytics`
-- [x] **Task 2 (Customer Retention & Churn)**: `https://github.com/vdeepika292007-gif/future_interns_ds_task2`
-- [x] **Task 3 (Marketing Campaign Conversion)**: `https://github.com/vdeepika292007-gif/future_interns_ds_task3`
-- [x] **Internship Dates**: September 2026 – October 2026 (1-Month Data Science & Analytics)
-- [x] **Certificate of Completion**: CIN: `FIT/SEP26/DS23421` (Verified image attached & interactive preview enabled)
-- [x] **Letter of Recommendation (LOR)**: Commendation from Program Coordinator Sujan Kumar C (Verified image attached)
-
-### 5. Contact Information
-- [x] **Email**: `vdeepika292007@gmail.com` (Direct mailto & one-click copy enabled)
-- [x] **LinkedIn**: `https://www.linkedin.com/in/deepikav8/` (Connected & active)
-- [x] **GitHub**: `https://github.com/vdeepika292007-gif` (Connected & active)
+| Area | Status | Technology | Verification Notes |
+|---|---|---|---|
+| **Core Architecture** | ✅ Completed | HTML5, CSS3, Vanilla JS, Bootstrap 5.3 | Removed React, Vite, TypeScript, Tailwind CSS, node_modules. Zero build tools needed. |
+| **Main Entry Point** | ✅ Completed | `index.html` (root) | Standalone semantic HTML5 loading Bootstrap 5.3 CDN, custom CSS & JS. |
+| **Styling & Theming** | ✅ Completed | `css/style.css` | Custom dark/light CSS variables, animations (ECG scroll, heartbeat, Buggy wiggle), glassmorphic card design. |
+| **Theme Switching** | ✅ Completed | Bootstrap 5.3 `data-bs-theme` + JS | Toggles between dark (`#070a13`) and light themes; state saved in `localStorage`. |
+| **Interactive Playground** | ✅ Completed | Vanilla JavaScript (`js/app.js`) | Dynamic Heart Disease ML Risk Calculator & Code Debug Game with animated Buggy mascot. |
+| **About & Education** | ✅ Completed | HTML5 / Bootstrap 5.3 | Real academic profile: JNNCE Shivamogga, CS Data Science, 5th Sem, 9.29 CGPA, Class of 2028. |
+| **Skills & Projects** | ✅ Completed | HTML5 / Vanilla JS Filtering | 5 repositories connected to GitHub, dynamic category tab filtering. |
+| **Internship & Documents** | ✅ Completed | HTML5 / Bootstrap Modal | Future Interns Data Science internship (3 tasks), Certificate & LOR preview modal. |
+| **Resume Integration** | ✅ Completed | PDF asset (`Deepika_V_Resume.pdf`) | Direct relative download buttons in navbar and hero. |
+| **Contact Channels** | ✅ Completed | HTML5 / Vanilla JS | Email `vdeepika292007@gmail.com` with 1-click copy, LinkedIn `deepikav8`, GitHub `vdeepika292007-gif`. Phone number removed as requested. |
+| **GitHub Pages Compatibility** | ✅ Verified | Static relative paths | Relative paths (`./css/...`, `./js/...`, `./certificates/...`) ready for `https://vdeepika292007-gif.github.io/my-portfolio/`. |
 
 ---
 
-## 📝 Remaining / Optional Tasks for Later
+## 🛠️ File Structure
 
-- [ ] Take screenshots of the project UIs and add preview images in `public/projects/`.
-- [ ] Add any new awards, hackathon wins, or online course certificates to the `certifications` array.
-- [ ] When ready, deploy to GitHub Pages or Vercel (instructions available in `README.md`).
+The project has been cleaned of all React/Vite/TypeScript/Tailwind build files:
 
+```text
+MyPortfolio/
+├── index.html                           # Standalone primary portfolio entry point
+├── css/
+│   └── style.css                        # Modern custom styling, CSS variables & animations
+├── js/
+│   └── app.js                           # Vanilla JS (Theme switch, ML model, Debug Game, filters)
+├── certificates/
+│   ├── future-interns-certificate.jpg   # Verified Future Interns Certificate
+│   └── future-interns-lor.jpg           # Verified Letter of Recommendation
+├── Deepika_V_Resume.pdf                 # Actual resume PDF
+├── favicon.svg                          # Custom DV monogram SVG favicon
+├── README.md                            # Comprehensive run and deployment documentation
+└── PROJECT_PROGRESS.md                  # This verification and status document
+```
+
+---
+
+## 🔬 Interactive Features Verification
+
+### 1. Heart Disease Risk Model (ML Playground)
+- **Algorithm**: Client-side calibrated logistic regression model mirroring Scikit-Learn coefficients.
+- **Inputs**: Age (20–85), Resting Blood Pressure (90–200), Serum Cholesterol (120–400), Max Heart Rate (70–210), Chest Pain Type (4 clinical types), Exercise Angina (Yes/No).
+- **Outputs**:
+  - Live percentage risk score with animated SVG circular gauge.
+  - Clinical zones: Low Risk (<25%), Moderate Risk (25–55%), High Risk (>55%).
+  - SHAP-style feature attribution bars indicating positive/negative risk contributors.
+  - One-click presets: *Healthy* vs. *High Risk* personas.
+
+### 2. Code Debug Game
+- **Mascot**: Animated "Buggy" SVG mascot with live facial expressions, speech bubble remarks, and wiggle animations.
+- **Gameplay**:
+  - 3 challenges: Palindrome Normalization, Array Frequency Counter, and Async Debounce Timer.
+  - Interactive code vs. diff view highlighting syntax bugs.
+  - Step-by-step test runner with realistic latency execution timings and pass/fail badges.
+  - Floating XP point notifications and streak counter.
+
+### 3. Responsive Navigation & Light/Dark Theme
+- Navbar auto-blurs on scroll and highlights active section via Bootstrap ScrollSpy.
+- Theme toggle instantly transitions between dark and light modes with proper color contrast.
+- Back-to-Top button triggers smooth scroll animation.
+
+---
+
+## 📋 Verification Checklist for GitHub Pages
+
+- [x] All asset paths use relative links (`./css/style.css`, `./js/app.js`, `./certificates/...`, `./Deepika_V_Resume.pdf`, `./favicon.svg`).
+- [x] Tested directly in browser without local dev server (`file:///` protocol and HTTP).
+- [x] `npm install`, `npm run dev`, and `npm run build` are no longer needed.
+- [x] No personal phone number exposed on the website.
+- [x] Accurate email (`vdeepika292007@gmail.com`), LinkedIn (`deepikav8`), and GitHub (`vdeepika292007-gif`).
+- [x] Git changes prepared cleanly for user review without automatic push.
