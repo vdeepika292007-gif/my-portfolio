@@ -125,3 +125,16 @@ When launching the portfolio via local server (`py -m http.server 8011`), the we
 - **Console Log Verification**: Executed headless browser diagnostic against `http://127.0.0.1:8011/`. Diagnostic error log confirmed **zero unhandled exceptions** (`[]`).
 - **DOM & Content Verification**: Confirmed that `Deepika V`, `9.29 CGPA`, `JNNCE`, `Future Interns`, and all five software projects (`MindVault`, `Multi Vault`, `Campus Placement Management System`, `Heart Disease Prediction`, `Code Debug Game`) render properly.
 - **Local Git Safety**: Changes kept strictly local; **no push to GitHub executed**.
+
+
+## GitHub Pages runtime incident correction (2026-11-09)
+
+The earlier runtime checks above did not establish reliable behavior on a cold hosted load. The following issues were reproduced and corrected:
+
+- The delayed-mount branch of `initProjectsEnhancer` observed its own card removal/insertion writes. This produced an unbounded MutationObserver microtask loop and froze the tab before timers could dismiss the loader. One scoped, frame-batched observer now disconnects during enhancement; existing cards and handlers are preserved across unrelated changes and route remounts.
+- Both a template section wrapper and its inner content have `.projectBlock`. Counting both assigned the wrong data and hid later projects. Enhancement and filtering now operate on the six outer sections: five projects and one internship.
+- The prior 2.2-second inactivity watchdog emitted `APP_LOADED` while WebGL models and textures were still loading. Browser tests reproduced an undefined flower-model clone and uninitialized resize uniforms. That early readiness signal was removed; asset-ready handlers now run after the loading promise resolves, resize guards unfinished uniforms, and loader dismissal waits for a mounted page.
+- The template router overwrote the static HTML title and metadata with Sunroom text and a GitHub profile URL. Runtime titles now identify Deepika; canonical and preview URLs resolve against the deployed site base. Normal pages permit indexing.
+- Entry-point asset query versions were updated to avoid reusing the prior browser-cached scripts.
+
+A dependency-free Chromium regression test is available at `tests/runtime-regression.cjs`. It covers delayed mounting, nested project wrappers, stable card nodes, project search, route remounting, real WebGL startup, certificate controls, correct metadata, and an event-loop heartbeat. Optional environment variables `TEST_ASSET_DELAY=6000` and `TEST_CPU_RATE=2` reproduce slow asset loading and a slower CPU. Test browser profiles stay in the OS temporary directory.

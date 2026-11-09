@@ -239,8 +239,6 @@ const DEEPIKA_INTERNSHIP = {
 
 // --- INITIALIZATION ENTRY POINT ---
 document.addEventListener("DOMContentLoaded", () => {
-  initCleanNavigation();
-  initIntroEnhancer();
   initProjectsEnhancer();
   initHeartDiseaseSimulator();
   initCodeDebugGame();
@@ -251,11 +249,16 @@ document.addEventListener("DOMContentLoaded", () => {
  * Ensures the preloader overlay never traps the user if a WebGL animation halts.
  */
 function initLoaderSafetyWatcher() {
-  setTimeout(() => {
+  function revealWhenReady() {
+    // Hiding the loader cannot make an unfinished Vue/WebGL mount ready.
+    if (!document.querySelector(".app.visible .page")) {
+      setTimeout(revealWhenReady, 300);
+      return;
+    }
     const loader = document.querySelector(".loaderBlock");
     if (loader) {
       const style = window.getComputedStyle(loader);
-      if (style.display !== "none" && style.opacity !== "0" && style.transform === "none") {
+      if (style.display !== "none" && style.opacity !== "0") {
         console.info("[Deepika Portfolio] Loader safety watcher: smoothly transitioning preloader away.");
         loader.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease";
         loader.style.transform = "translateY(-100%)";
@@ -264,7 +267,8 @@ function initLoaderSafetyWatcher() {
         setTimeout(() => { loader.style.display = "none"; }, 700);
       }
     }
-  }, 2800);
+  }
+  setTimeout(revealWhenReady, 2800);
 }
 
 /**
@@ -377,17 +381,6 @@ function initCleanNavigation() {
  * ==========================================================================
  */
 function initIntroEnhancer() {
-  const introBlock = document.querySelector(".introBlock");
-  if (!introBlock) {
-    const observer = new MutationObserver(() => {
-      if (document.querySelector(".introBlock")) {
-        enhanceIntro();
-        observer.disconnect();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    return;
-  }
   enhanceIntro();
 }
 
@@ -537,32 +530,37 @@ function enhanceIntro() {
  * ==========================================================================
  */
 function initProjectsEnhancer() {
-  const projectBlocks = document.querySelectorAll(".projectBlock");
-  if (!projectBlocks || projectBlocks.length === 0) {
-    const observer = new MutationObserver(() => {
-      const blocks = document.querySelectorAll(".projectBlock");
-      if (blocks && blocks.length > 0) {
-        enhanceProjects();
-        initIntroEnhancer();
-        initCleanNavigation();
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    return;
-  }
-  enhanceProjects();
+  const app = document.getElementById("vue-app");
+  if (!app) return;
 
-  const persistentObserver = new MutationObserver(() => {
-    const titleBlock = document.querySelector(".projectBlock__title");
-    if (titleBlock && !titleBlock.querySelector(".deepika-section-header")) {
-      enhanceProjects();
-    }
+  // Vue can mount after DOMContentLoaded and replaces pages on route changes.
+  // Batch those changes, and never observe the DOM writes we make ourselves.
+  let pendingFrame = 0;
+  const observer = new MutationObserver(() => {
+    if (!pendingFrame) pendingFrame = requestAnimationFrame(enhancePage);
   });
-  persistentObserver.observe(document.body, { childList: true, subtree: true });
+
+  function enhancePage() {
+    pendingFrame = 0;
+    observer.disconnect();
+    try {
+      initCleanNavigation();
+      initIntroEnhancer();
+      enhanceProjects();
+    } finally {
+      observer.observe(app, { childList: true, subtree: true });
+    }
+  }
+
+  enhancePage();
 }
 
 function enhanceProjects() {
-  const projectBlocks = document.querySelectorAll(".projectBlock");
+  // The template uses .projectBlock on both a section wrapper and its content.
+  // Count each rendered project once, or later projects get hidden as extras.
+  const projectBlocks = [...document.querySelectorAll(".projectBlock")].filter(
+    block => !block.parentElement.closest(".projectBlock")
+  );
   if (!projectBlocks || projectBlocks.length === 0) return;
 
   // 1. Enhance Section Header (above project 0)
@@ -846,9 +844,9 @@ function enhanceSingleProjectCard(block, idx) {
   const infoContainer = block.querySelector(".projectBlock__informations");
   if (!infoContainer) return;
 
-  // Clear existing custom card if any to refresh
+  // Preserve cards, search state and handlers across unrelated DOM updates.
   const existingCard = infoContainer.querySelector(".deepika-project-card");
-  if (existingCard) existingCard.remove();
+  if (existingCard) return;
 
   const card = document.createElement("div");
   card.className = "deepika-project-card";
@@ -974,7 +972,7 @@ function enhanceInternshipBlock(block) {
   if (!infoContainer) return;
 
   const existingCard = infoContainer.querySelector(".deepika-internship-card");
-  if (existingCard) existingCard.remove();
+  if (existingCard) return;
 
   const card = document.createElement("div");
   card.className = "deepika-internship-card";
