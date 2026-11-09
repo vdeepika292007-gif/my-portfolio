@@ -12,11 +12,11 @@ const root = path.resolve(__dirname, '..');
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'deepika-runtime-test-'));
 const browserPath = process.env.BROWSER_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.wasm': 'application/wasm', '.svg': 'image/svg+xml', '.json': 'application/json' };
-const fixture = `<!doctype html><link rel="stylesheet" href="./assets/portfolio-interactive.css"><div id="vue-app"></div>
+const fixture = `<!doctype html><link rel="stylesheet" href="./assets/portfolio-interactive.css"><style>.gridWrapper {display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}</style><div id="vue-app"></div>
 <script src="./assets/portfolio-interactive.js"></script>
 <script>
 window.mountFixture = () => {
-  document.querySelector('#vue-app').innerHTML = '<nav class="navbarBlock"><div class="navbarBlock__right"></div></nav><div class="introBlock"><div class="introBlock__bottom"></div></div><div class="projectBlock__title"></div>' + '<section class="projectBlock"><div class="projectBlock"><div class="projectBlock__informations"></div></div></section>'.repeat(6);
+  document.querySelector('#vue-app').innerHTML = '<nav class="navbarBlock"><div class="navbarBlock__right"></div></nav><div class="introBlock"><div class="introBlock__bottom"></div></div> ' + Array.from({length:6}, (_, i) => '<section class="projectBlock"><div class="projectBlock">' + (i === 0 ? '<div class="gridWrapper projectBlock__title"></div>' : '') + '<div class="projectBlock__informations"></div></div></section>').join('');
 };
 // Match a cold hosted load: Vue mounts after the enhancer's DOMContentLoaded.
 setTimeout(mountFixture, 120);
@@ -97,6 +97,7 @@ async function until(expression, timeout = 45000) {
   await delay(400);
   assert.deepEqual(await evaluate('window.__observerLoops'), [], 'An observer repeatedly triggered itself during delayed mounting');
   assert.equal(await evaluate('document.querySelectorAll(".deepika-internship-card").length'), 1);
+  assert.equal(await evaluate('getComputedStyle(document.querySelector(".projectBlock__title")).display'), 'block', 'The template grid must not squeeze the carousel');
   assert.equal(await evaluate('document.querySelector(".project-carousel__track").scrollWidth > document.querySelector(".project-carousel__track").clientWidth'), true, 'Projects must overflow horizontally');
   await evaluate('document.querySelector(".project-carousel [data-direction=" + JSON.stringify("1") + "]").click()');
   await until('document.querySelector(".project-carousel__track").scrollLeft > 100');
@@ -151,6 +152,33 @@ async function until(expression, timeout = 45000) {
   console.log('RUNTIME_ERRORS', JSON.stringify(errors));
   console.log('FAILED_REQUESTS', JSON.stringify(failedRequests));
   assert.deepEqual(errors, [], 'The real page must not throw uncaught exceptions');
+  if (process.env.TEST_AUDIT_DIR) {
+    fs.mkdirSync(process.env.TEST_AUDIT_DIR, {recursive:true});
+    for (const width of (process.env.TEST_AUDIT_WIDTHS || '1520,1280,768,390').split(',').map(Number)) {
+      await command('Emulation.setDeviceMetricsOverride', {width,height:900,deviceScaleFactor:1,mobile:width<600});
+      await delay(600);
+      for (const [name, selector] of Object.entries({room:'.headerBlock',intro:'.deepika-intro-card',projects:'.deepika-section-header',carousel:'.project-carousel',internship:'.deepika-internship-card',footer:'.footerBlock'})) {
+        const found = await evaluate(`(() => {const el=document.querySelector(${JSON.stringify(selector)}); if(!el)return false; el.scrollIntoView({block:'start',behavior:'instant'});return true})()`);
+        if (!found) continue;
+        await delay(500);
+        const result = await command('Page.captureScreenshot', {format:'png'});
+        fs.writeFileSync(path.join(process.env.TEST_AUDIT_DIR, `${width}-${name}.png`), Buffer.from(result.data,'base64'));
+      }
+      await evaluate('window.scrollTo({top:document.documentElement.scrollHeight,behavior:"instant"})');
+      await delay(500);
+      const bottom = await command('Page.captureScreenshot', {format:'png'});
+      fs.writeFileSync(path.join(process.env.TEST_AUDIT_DIR, `${width}-bottom.png`), Buffer.from(bottom.data,'base64'));
+      const layout = await evaluate(`(() => {
+        const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom}};
+        return {viewport:innerWidth,body:document.documentElement.scrollWidth,carousel:rect(document.querySelector('.project-carousel')),title:rect(document.querySelector('.deepika-section-header')),nav:rect(document.querySelector('.navbarBlock')),brand:rect(document.querySelector('.left__title')),actions:rect(document.querySelector('.navbar-clean-actions'))};
+      })()`);
+      console.log('LAYOUT',width,JSON.stringify(layout));
+      assert.ok(layout.body <= layout.viewport+1, 'The document must not overflow horizontally');
+      assert.ok(layout.carousel.width > width*.70, 'The carousel must use the content width');
+      assert.ok(layout.actions.x >= layout.brand.right, 'Navigation actions must not overlap the brand');
+      assert.ok(layout.actions.right <= width, 'Navigation must fit the viewport');
+    }
+  }
   const screenshot = process.env.TEST_SCREENSHOT;
   if (screenshot) { const result = await command('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(screenshot, Buffer.from(result.data, 'base64')); }
   console.log('PASS: cold app load, title, responsive event loop and certificate modal');

@@ -1585,3 +1585,69 @@
 @media(prefers-reduced-motion:reduce) {
   .project-carousel *, .project-carousel__track > .deepika-project-card { transition:none !important; scroll-behavior:auto !important; }
 }
+
+/* The template grid is for its old title, not a heading plus a full carousel. */
+.project-carousel-host .projectBlock__title {
+  display:block !important; width:100% !important; max-width:1240px !important;
+  min-width:0 !important; padding:0 clamp(16px,4vw,56px) !important; margin:0 auto !important;
+}
+.project-carousel-host .deepika-section-header { width:100% !important; min-width:0; }
+.project-carousel-host .deepika-section-heading { font-size:clamp(32px,5vw,64px) !important; line-height:1.08 !important; max-width:1000px; }
+.project-carousel { width:100%; min-width:0; }
+.project-carousel__track { width:100%; min-width:0; box-sizing:border-box; }
+.project-carousel-host { scroll-margin-top:130px; }
+
+/* One responsive navigation bar; no fixed offsets between independent pieces. */
+.navbarBlock {
+  position:fixed !important; top:12px !important; left:16px !important;
+  width:calc(100% - 32px) !important; margin:0 !important; padding:12px 18px !important;
+  display:flex !important; align-items:center !important; justify-content:space-between !important;
+  gap:16px !important; border:1px solid #d5dce7; border-radius:22px;
+  background:rgba(246,248,253,.94); backdrop-filter:blur(16px); color:#152332 !important;
+  box-shadow:0 6px 28px #15233212; z-index:1030 !important;
+}
+.navbarBlock__left, .navbarBlock__right {
+  position:static !important; width:auto !important; margin:0 !important; height:auto !important;
+  display:flex !important; align-items:center !important; gap:16px !important; padding:0 !important;
+  grid-template-columns:none !important; pointer-events:auto !important; min-width:0;
+}
+.navbarBlock__left { flex:0 0 auto; }
+.navbarBlock__right { flex-wrap:wrap; justify-content:flex-end; }
+.navbarBlock .left__title { margin:0 !important; color:#152332 !important; font-size:16px !important; white-space:nowrap; }
+.navbarBlock .left__infos { display:none !important; }
+.navbarBlock__right .right__links {
+  position:static !important; display:flex !important; gap:16px !important; margin:0 !important;
+  grid-column:auto !important; font-size:13px !important; color:#152332 !important;
+}
+.navbarBlock .navbar-clean-actions {
+  position:static !important; top:auto !important; right:auto !important; display:flex !important;
+  flex-wrap:wrap !important; justify-content:flex-end; gap:6px !important; z-index:auto !important;
+}
+.navbarBlock a { color:#152332 !important; }
+.navbarBlock { --navbar-fg:#152332 !important; --navbar-sound-line:#152332 !important; }
+.navbarBlock .right__buttons { display:none !important; }
+.navbarBlock__menu { display:none !important; }
+.projectBlock__informations > :not(.deepika-internship-card):not(.deepika-project-card) { display:none !important; }
+.deepika-intro-card, .deepika-section-header, .project-carousel,
+.deepika-internship-card, .footerBlock { scroll-margin-top:100px; }
+.navbarBlock .nav-clean-btn { font-size:12px !important; padding:7px 11px !important; }
+@media(max-width:1000px) {
+  .navbarBlock { align-items:flex-start !important; }
+  .navbarBlock__right { gap:10px !important; }
+  .navbarBlock__right .right__links { flex-wrap:wrap; }
+}
+@media(max-width:600px) {
+  .navbarBlock { left:8px !important; top:8px !important; width:calc(100% - 16px) !important; padding:10px 12px !important; gap:8px !important; border-radius:16px; }
+  .navbarBlock__right { flex:1; gap:8px !important; }
+  .navbarBlock .nav-clean-btn { padding:5px 8px !important; font-size:10px !important; gap:4px !important; }
+  .navbarBlock__right .right__links { font-size:11px !important; gap:12px !important; }
+  .project-carousel__controls { flex-wrap:wrap; }
+  .project-carousel-host .deepika-section-heading { font-size:34px !important; }
+  .project-carousel-host { scroll-margin-top:160px; }
+  .navbarBlock .soundButton { width:28px !important; height:28px !important; }
+  .introBlock { padding:100px 16px 48px !important; }
+  .introBlock__bottom { width:100% !important; max-width:100% !important; padding:0 !important; }
+  .deepika-intro-card { width:100% !important; max-width:100% !important; padding:28px 20px !important; }
+  .deepika-intro-card, .deepika-section-header, .project-carousel,
+  .deepika-internship-card, .footerBlock { scroll-margin-top:140px; }
+}
