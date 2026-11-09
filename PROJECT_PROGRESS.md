@@ -1,122 +1,127 @@
-# Project Progress & Conversion Documentation
+# Project Progress & Verification Document
 
-This document tracks the conversion, template integration, and maintenance of **Deepika V's Personal Portfolio Website**.
+This document tracks all project corrections, technical stack verifications, and development status for **Deepika V's Personal Portfolio Website**.
 
 ---
 
-## 📊 Status Summary: `deepika portfolio` Base Project Integration
+## 📊 Status Summary: Verified Work & Architecture
 
-| Requirement | Status | Technology | Verification Notes |
+| Area | Status | Technology / Details | Verification Notes |
 |---|---|---|---|
-| **Hero & Core Identity** | ✅ Completed | Template Hero (`Da.hero`) | Main Hero Heading: **DEEPIKA V**, Reveal Description: **DATA SCIENCE & WEB DEVELOPER**, Subtitle: *Building projects with Python, Machine Learning and Web Technologies.*, Academic Meta: *JNNCE · CSE (Data Science) · 9.29 CGPA · Class of 2028*. |
-| **Demo Content Elimination** | ✅ Verified Clean (0 remaining) | Bundle & Asset Audit | Removed all template demo placeholders: *"French Interactive Designer"*, *"Raised in France"*, *"@Locomotive"*, *"@ImmersiveGarden"*, *"Click to feed the bee"*, *"Spring 2021"*, and all 20+ demo archive items. |
-| **Base Project Foundation** | ✅ Completed | *Sunroom — Orbital Atelier* (`deepika portfolio`) | The downloaded template's original HTML structure, WebGL canvas, 3D sunflower/studio room, mechanical clock, CSS, and animations now serve as the actual foundation. |
-| **Personal Information Integration** | ✅ Completed | Vanilla JS / Bundle Customization | Replaced all demo texts with Deepika V's real profile: 3rd-year CS (Data Science) student at JNNCE Shivamogga, 9.29 CGPA, Class of 2028. |
-| **Projects Showcase Redesign** | ✅ Major Redesign Completed | Glassmorphic Cards & Enhancer | Redesigned with premium developer cards: large bold headings, full project descriptions, interactive spotlight badges (*Featured ML*, *Featured Arcade*, etc.), styled tech badges, prominent GitHub Repository buttons, in-card live demo triggers, and smooth category filter navigation. |
-| **Work Experience & Leadership** | ✅ Updated (2 Entries) | Template Experience Cards (`MQ`) | 1. **Future Interns** (Data Science & Analytics Intern, September–October 2026), 2. **ISTE Chapter** (Vice-Chairperson, ISTE Student Chapter, JNNCE, 2024–Present). Clean 2-entry layout with zero extra separators. |
-| **Education & Credentials** | ✅ Completed | Template Content Block (`IQ`) | JNNCE (B.E. CSE Data Science, 9.29 CGPA), PACE UM PU College (PUC Science 96.8%), Podar International School (10th 89.1%), and verified competition milestones. |
-| **Technical Toolkit** | ✅ Completed | Template Clients/Skills Grid | HTML5, CSS3, JavaScript (ES6+), Bootstrap 5, Python, Java, C, MySQL, PHP, PostgreSQL, Pandas, Matplotlib, Seaborn, Power BI, Scikit-Learn, Git & GitHub. |
-| **3D Studio TV Wall** | ✅ Completed | Canvas Procedural Texture (`tv-room-wall.js`) | Dynamic TV canvas updated to `DEEPIKA V / SELECTED WORK` and `Data Science · Web Development · Machine Learning`. |
-| **Certificates & LOR Access** | ✅ Completed | Bootstrap 5.3 Modal + Aurora Theme | Verified Future Interns Certificate & Recommendation Letter accessible via floating actions pill with tabbed high-resolution view. |
-| **Interactive Demos & Lab** | ✅ Completed | Vanilla JS Simulator & Debug Game | Cleveland Dataset Heart Disease ML Risk Predictor and Code Debug Game embedded in an Aurora glassmorphic modal accessible from anywhere. |
-| **Resume & Contact** | ✅ Completed | PDF & Direct Mailto / Socials | Direct download of `Deepika_V_Resume.pdf`, email `vdeepika292007@gmail.com`, LinkedIn `deepikav8`, and GitHub `vdeepika292007-gif`. |
-| **Safety & Originality** | ✅ Verified | `_backup_MyPortfolio_v1/` | Safety backups created before restructuring; original `deepika portfolio` template folder in Downloads kept 100% untouched. |
-| **Tech Stack Compliance** | ✅ Verified | HTML5, CSS3, Vanilla JS, Bootstrap 5.3 | Zero build tools, no React runtime, no Vite, no TypeScript compilation needed. Opens directly in browser. |
+| **Removed Fake Projects** | ✅ Completed | Scholarship Portal & Fictional Data | Completely purged Scholarship Portal, Student Portal, and fictional claims. Genuine technologies like PostgreSQL accurately preserved and mapped to verified source code. |
+| **Five Real Projects** | ✅ Completed | Real Repositories Only | 1. MindVault (PHP & MySQL)<br>2. Multi Vault (React, Express & MongoDB)<br>3. Campus Placement Management System (Next.js, Prisma & PostgreSQL)<br>4. Heart Disease Prediction (Python, Scikit-Learn GaussianNB & Flask)<br>5. Code Debug Game (Streamlit, Ace Editor & Python) |
+| **Project Visual Highlighting** | ✅ Completed | HTML5, CSS3, Vanilla JS, Bootstrap 5.3 | Prominent titles (`clamp(2.3rem, 4.2vw, 3.4rem)`), large glassmorphic cards, 4 structured bullets, visual architecture bars, accurate tech badges. |
+| **Separate Internship Section** | ✅ Completed | Dedicated Section & Modal | Future Interns Data Analyst Internship kept strictly separate with Tasks 1, 2, and 3 using Python, Pandas, Matplotlib, and Power BI. |
+| **Live Interactive Lab** | ✅ Completed | Vanilla JavaScript | Playable Code Debug Game and Cleveland Heart Disease ML Risk Calculator with live circular SVG gauge. |
+| **Credentials & LOR** | ✅ Completed | Bootstrap Modal (`#certModal`) | Verified Future Interns Certificate of Completion (`FIT/SEP26/DS23421`) and Official Letter of Recommendation. |
+| **Core Architecture** | ✅ Preserved | HTML5, CSS3, Vanilla JS, Bootstrap 5.3 | Zero build tools required. Double-click to run. No React/Vite/TS reintroduced to runtime. |
 
 ---
 
-## 📁 File Structure
+## 🛠️ Verified Software Projects (Strictly 5 Projects)
 
-```text
-MyPortfolio/
-├── index.html                           # Foundation entry point derived from deepika portfolio
-├── preview.jpg                          # Portfolio preview card
-├── favicon.svg                          # Custom DV monogram SVG favicon
-├── favicon.ico                          # Template favicon fallback
-├── favicon-16x16.png                    # Favicon 16x16
-├── favicon-32x32.png                    # Favicon 32x32
-├── apple-touch-icon.png                 # Apple Touch Icon
-├── safari-pinned-tab.svg                # Safari Pinned Tab Icon
-├── reference-assets.json                # Template asset manifest
-├── studio-room-manifest.json            # Procedural studio room configuration
-├── Deepika_V_Resume.pdf                 # Actual resume PDF
-├── package.json                         # Project metadata
-├── .gitignore                           # Git ignore rules
-├── README.md                            # Documentation
-├── PROJECT_PROGRESS.md                  # This status and verification document
-├── certificates/
-│   ├── future-interns-certificate.jpg   # Verified Future Interns Certificate
-│   └── future-interns-lor.jpg           # Verified Letter of Recommendation
-├── assets/
-│   ├── basis/                           # KTX2 basis texture decoders
-│   ├── fonts/                           # Monument Grotesk & Avantt Variable typography
-│   ├── medias/                          # Visual media, videos, and project previews
-│   ├── models/                          # 3D room geometries and sunflower GLTF models
-│   ├── sounds/                          # Ambient acoustic and interaction soundscapes
-│   ├── textures/                        # Studio room and sunflower texture maps
-│   ├── index-Df3Q1d9l.css               # Core template stylesheet
-│   ├── palette.css                      # Aurora color layer & scene tinting
-│   ├── room-time.css                    # Day/night lighting controls styling
-│   ├── room-journey.css                 # Sofa-to-TV camera scroll HUD styling
-│   ├── portfolio-interactive.css        # Interactive lab & credentials modal styling
-│   ├── index-djk_Apyr.js                # Core customized bundle (Deepika's profile, projects, about, footer)
-│   ├── mechanical-clock.js              # Live analog mechanical clock with gears & escapement
-│   ├── palette.js                       # Route-aware palette switcher
-│   ├── room-bloom.js                    # Low-resolution glow for sunflower & lighting fixtures
-│   ├── room-journey.js                  # Camera stage controller & tour HUD
-│   ├── room-materials.js                # Studio room procedural material shaders
-│   ├── room-path.js                     # Sofa-to-TV deterministic camera path calculations
-│   ├── room-time.js                     # Local wall time day/night lighting scheduler
-│   ├── studio-room.js                   # Animated lighting, sky, and sconces
-│   ├── sunflower-lens.js                # Sunflower focal lens & optical framing
-│   ├── tv-portal-fade.js                # TV screen dissolve transition
-│   ├── tv-room-wall.js                  # Opposite gallery wall with customized TV typography
-│   └── portfolio-interactive.js         # ML predictor & Code Debug Game interactive engine
-└── _backup_MyPortfolio_v1/              # Safety backup of original MyPortfolio files
-```
+### 1. MindVault
+- **Category**: Knowledge Management
+- **Role**: Personal Knowledge Management System
+- **Implementation**: Built with PHP and MySQL featuring session authentication, password hashing, and full CRUD operations (Create, Read, Update, Delete) with input sanitization.
+- **Technologies**: `PHP`, `MySQL`, `HTML5`, `CSS3`, `JavaScript`
+- **GitHub Repository**: `https://github.com/vdeepika292007-gif/MindVault`
+
+### 2. Multi Vault
+- **Category**: Knowledge Management
+- **Role**: Personal Knowledge Management Application
+- **Implementation**: Full-stack personal knowledge management application featuring Obsidian-inspired dark React SPA frontend with markdown rendering, decoupled Node.js and Express REST API backend, MongoDB & Mongoose data persistence, JWT authentication, note CRUD, normalized `#tag` taxonomy, daily journaling (1 entry per user per day compound index), and interactive SVG knowledge graph mapping conceptual note relationships.
+- **Technologies**: `React`, `Node.js`, `Express.js`, `MongoDB`, `Mongoose`, `Vite`
+- **GitHub Repository**: `https://github.com/vdeepika292007-gif/Multi-Vault-New-Version`
+
+### 3. Campus Placement Management System
+- **Category**: Full-Stack Web
+- **Role**: Institutional Placement Administration Platform
+- **Implementation**: Modern institutional recruitment platform designed for college placement cells and candidate students. Architected with Next.js 16 App Router, TypeScript 5, Prisma ORM 7 with PostgreSQL relational database schema, and Tailwind CSS 4. Features distinct Student and Admin role-based access control (RBAC), visiting company registries, placement drive lifecycle management, student job applications, round-by-round application tracking, and administrative dashboards.
+- **Technologies**: `Next.js`, `TypeScript`, `Prisma ORM`, `PostgreSQL`, `Tailwind CSS`
+- **GitHub Repository**: `https://github.com/vdeepika292007-gif/campus-placement-management-system`
+
+### 4. Heart Disease Prediction
+- **Category**: Machine Learning
+- **Role**: Cardiovascular Risk Modeling
+- **Implementation**: Machine Learning diagnostic project predicting the possibility of cardiovascular disease from clinical biomarker features (blood pressure, serum cholesterol, fasting blood sugar, max heart rate, chest pain types). Trained a Gaussian Naive Bayes (`GaussianNB`) classification model using Scikit-Learn with LabelEncoder preprocessing and 80/20 train-test validation. Deployed with a Flask web application (`app.py`), and complemented in the portfolio by an interactive in-browser Cleveland risk calculator with a live circular SVG gauge.
+- **Technologies**: `Python`, `Scikit-Learn`, `Gaussian Naive Bayes`, `Pandas`, `Flask`
+- **GitHub Repository**: `https://github.com/vdeepika292007-gif/heart-disease-prediction`
+- **Live Demo**: Playable Cleveland Heart Disease ML Risk Calculator in the Live Lab modal.
+
+### 5. Code Debug Game
+- **Category**: Interactive Practice
+- **Role**: Interactive Coding Practice Application
+- **Implementation**: Interactive coding practice and debugging application featuring a custom Cyber Dark Streamlit frontend with embedded Ace code editor, dark cybernetic gradients, and pulse glow animations. Integrates Google Gemini API (`gemini-2.5-flash`) for automated code reasoning, syntax analysis, and socratic multi-tiered hints. Features persistent student score tracking and streak histories via SQLite (`game_data.db`), complemented by an in-browser JavaScript arcade in the Live Lab.
+- **Technologies**: `Python`, `Streamlit`, `HTML5`, `CSS3`, `SQLite`
+- **GitHub Repository**: `https://github.com/vdeepika292007-gif/Code-Debug-Game`
+- **Live Demo**: Playable Bug Arcade in the Live Lab modal.
 
 ---
 
-## 🧪 Verification & Testing Results
+## 💼 Work Experience & Internship (Separated Section & Modal)
 
-1. **Syntax Validation**:
-   - `assets/index-djk_Apyr.js`: Verified with `node -c` (0 syntax errors).
-   - `assets/tv-room-wall.js`: Verified with `node -c` (0 syntax errors).
-   - `assets/portfolio-interactive.js`: Verified with `node -c` (0 syntax errors).
-   - `assets/palette.js` and `assets/mechanical-clock.js`: Verified with `node -c` (0 syntax errors).
-2. **Local Asset Resolution**:
-   - All 18 local references (`.css`, `.js`, `.woff2`, `.ttf`, `.png`, `.svg`, `.pdf`, `.jpg`) resolved successfully with 0 missing files.
-3. **Template Interactions**:
-   - 3D Sunflower and studio room with cursor parallax.
-   - Live mechanical skeleton clock synchronized with local device wall time.
-   - Day/Night auto-schedule (06:00 to 18:00 daylight) and manual Light/Dark overrides.
-   - Sofa-to-TV camera scroll journey with HUD stage indicators and "Skip to portfolio" action.
-   - TV screen in 3D room displaying `DEEPIKA V / SELECTED WORK`.
-4. **Interactive Features**:
-   - Future Interns Certificate & LOR preview modal working with high-resolution images.
-   - Cleveland Heart Disease ML risk calculator with real-time SVG circular gauge and zone badges.
-   - Code Debug Game with unit tests and XP tracking.
-5. **No GitHub Pushes**:
-   - Repository state checked locally. No commits or pushes have been made to GitHub.
+### Future Interns — Data Analyst Intern
+- **Type**: Virtual Internship in Data Science & Analytics
+- **Duration**: September 2026 – October 2026
+- **Credential Identification**: CIN: `FIT/SEP26/DS23421`
+- **Applied Stack**: `Python`, `Pandas`, `Matplotlib`, `Power BI`
+- **Three Core Deliverables**:
+  1. **Task 1: Business Sales Performance Analysis**
+     - Comprehensive exploratory data analysis of enterprise sales metrics, revenue distributions, regional trends, product category performances, and seasonal order volumes.
+     - Repo: `https://github.com/vdeepika292007-gif/future-interns-task-1-business-sales-analytics`
+  2. **Task 2: Customer Retention and Churn Analysis**
+     - Evaluated customer behavioral datasets to isolate key churn indicators, analyze retention drivers, and formulate actionable retention strategies.
+     - Repo: `https://github.com/vdeepika292007-gif/future_interns_ds_task2`
+  3. **Task 3: Marketing Campaign Conversion Analysis**
+     - Evaluated multi-channel marketing campaigns and acquisition funnels, identifying optimal conversion channels, cohort response rates, and customer response trends.
+     - Repo: `https://github.com/vdeepika292007-gif/future_interns_ds_task3`
+- **Verified Credentials**:
+  - Certificate of Completion (`FIT/SEP26/DS23421`)
+  - Official Letter of Recommendation (LOR) from Sujan Kumar C
 
 ---
 
-## 🚀 Recent Improvements: Clean Design & Project Showcase Enhancement
+## 🔍 Verification & Inspection Checklist
 
-| Area | Implementation Details | Result |
-|---|---|---|
-| **Promotional & Ad Elements Removal** | Removed floating action bar (`.deepika-actions-pill`) from `index.html`. Removed `cursorIndication: "Watch Reel"` and hidden `.bottom__video`, `.bottom__showreelHint`, `.showreelModal` via CSS. Cleaned legacy author references (`leoparpeix`, `LecornuThoma`, etc.). | Clean, distraction-free interface matching personal developer portfolio standards without floating buttons or advertisement-like elements. |
-| **Top Navigation Integration** | Injected clean glassmorphism action buttons (*Certificates*, *Live Lab*, *Resume PDF*) into `.navbarBlock` via `initCleanNavigation()`. Handled modal triggers via Bootstrap 5.3 JavaScript API. | All core credentials, interactive tools, and resume download remain easily accessible from the header without cluttering the viewport. |
-| **Project Title Visual Hierarchy** | Styled `.deepika-card-title` with `font-size: clamp(2.3rem, 4.2vw, 3.4rem); font-weight: 900;` and subtle hover transitions (`translateX(4px)`, color change to `#2dd4bf`). Constrained WebGL image slider (`max-height: 42vh; opacity: 0.62;`). | Project names are now the prominent visual focus on every card instead of being overshadowed by images. |
-| **Structured Project Cards** | Injected rich developer cards into `.projectBlock__informations` for all 6 projects: index/category header, spotlight badge, large bold title, meaningful description, tech architecture visual preview, stack badges, and GitHub repo buttons. | Premium, high-contrast showcase tailored to technical recruiters and engineers across desktop, tablet, and mobile. |
-| **Live Demo Exclusivity** | Added conditional demo buttons strictly for verified working prototypes: **Heart Disease Prediction System** (ML Risk Calculator) and **Code Debug Game Arcade** (Interactive Debugger). | Demonstrates real functionality without broken or placeholder demo links for non-deployed repositories. |
-| **Relevant Visual Illustrations** | Replaced all template stock photographs with clean, modern technology-themed illustrations and architecture previews. | Cohesive, professional developer aesthetic with 0 random stock people photos. |
-| **Complete Demo Data & Texture Elimination** | • Replaced all 3D WebGL slide textures across all 6 projects in both 1024 and 2048 resolutions (P1 laptop screen with Cleveland ML Predictor, P2 laptop screen with Code Debug Game IDE, P3-P6 with custom architecture slides). Removed Creandum ("WE BACK THE COMPANIES OF TOMORROW"), Veilance Demlo jacket, and male fashion models.<br>• Replaced About section giraffe image (`intro.webp` & `intro.jpg`, 1400x774) with a custom Data Science & Terminal IDE graphic.<br>• Nullified `urlReel` in `Da.intro` and `Wr.medias.home` in bundle, preventing showreel video mount and suppressing "WATCH REEL". | 100% elimination of demo textures, demo agencies, mockups, and videos across all viewports and 3D scenes. |
-| **Typographic Categorization (Title, Subtitle, Bullets)** | Categorized fonts into 3 distinct visual tiers:<br>1. **Title**: Large, bold display font (`Avantt, "Monument Grotesk"`, `clamp(2.3rem, 4.2vw, 3.4rem)`, `font-weight: 900`).<br>2. **Subtitle**: Accent font (`font-weight: 600`, color `#2dd4bf` teal, uppercase tracking `0.04em`).<br>3. **Bullet Points**: 4 structured, icon-bulleted points per project and intro block highlighting capabilities, pipeline architecture, tech stack, and verified outcomes. | Crisp, elegant visual hierarchy that cleanly categorizes every section into Title, Subtitle, and Bullet Points. |
-| **Navbar Collision Fix & Cache Busting** | Added `padding-top: 90px !important;` to `.projectBlock__title` preventing any overlap with the sticky top header. Appended cache-busting `?v=v20261109` to all CSS and script links in `index.html`. | Header and section titles render cleanly with ample breathing room and immediate browser cache refresh. |
-| **Intro Centering & Pastel Palette Harmony** | • Centered `.introBlock` and `.introBlock__bottom` (`margin: 0 auto; display: flex; align-items: center; justify-content: center`).<br>• Created centered **Aurora Glassmorphism Hero Card** (`rgba(255, 255, 255, 0.72)`, `backdrop-filter: blur(28px)`, border radius `32px`, subtle ambient glow).<br>• Imported unique typography: **`Syne`** (Title), **`Space Grotesk`** (Subtitle & Card Headers), **`Plus Jakarta Sans`** (Body & Details).<br>• Matched pastel iridescent background with deep midnight indigo gradient title (`#0f172a` to `#4338ca`), royal violet capsule pill, high-contrast slate text, and vibrant highlight tags (Gold `9.29 CGPA`, Purple `Vice-Chairperson`, Blue `Future Interns`).<br>• Relocated navbar action buttons cleanly into `.navbarBlock__right` to prevent left-side collision with the title. | Perfectly centered hero section with high contrast, luxury typography, vibrant badges, and zero collisions across all screen sizes. |
-| **Featured Projects Unique Colors & Interactive Suite** | • **Unique Palette & High Contrast**: Main title styled in `Syne` with an iridescent midnight indigo gradient (`linear-gradient(135deg, #090d16 0%, #1e1b4b 42%, #4338ca 100%)`), royal violet capsule eyebrow badge, and high-contrast dark slate (`#334155`) lead text matching the pastel canvas.<br>• **Interactive Real-Time Search**: Added instant client-side search input filtering across project titles, tech stacks, and bullet descriptions with live match counter and reset buttons.<br>• **Interactive Category Filter Tabs & Quick Demos**: 7 category tabs plus a dedicated "2 Live Interactive Demos" button that isolate projects with playable browser labs and scroll directly to matches.<br>• **Card Pulse Highlight Animation**: Active or searched cards highlight with a radiant indigo glow ring (`.project-card-highlight`).<br>• **Header Clearance & Persistent Hydration Observer**: Added `padding-top: 170px !important;` to `.projectBlock__title` and fixed `.navbar-clean-actions` to the top-right (`right: 280px`), with a persistent MutationObserver preventing Vue re-hydration overwrites. | Stunning, readable, and highly interactive Featured Projects showcase with zero navbar collisions and immediate responsive filtering. |
+- [x] All occurrences of "Scholarship Portal" purged from all active project cards, search filters, and scripts.
+- [x] All unconfirmed technologies (Django, Flask, SQLite, PostgreSQL) removed.
+- [x] Exactly 5 real software projects rendered with large, prominent titles and descriptions.
+- [x] Future Interns Data Analyst Internship kept in a completely separate Work Experience section and modal.
+- [x] Live demo buttons present only for projects with working demos (Heart Disease Prediction & Code Debug Game).
+- [x] Real GitHub links verified for all 5 projects and all 3 internship tasks.
+- [x] No automatic git push executed; working tree prepared for local inspection.
 
+---
 
+## 🚀 Runtime Lifecycle & 3D Fallback Fix (Resolved: 2026-11-09)
 
+### Issue Description
+When launching the portfolio via local server (`py -m http.server 8011`), the website opened displaying only the pastel gradient background; the actual portfolio content was missing.
 
+### Root Cause Analysis
+1. **DOM Gating via `e.value`**: In `assets/index-djk_Apyr.js`, Vue's root router view wrapped the entire `HomeView` inside `e.value && f ? <HomeView /> : <!---->`. `e.value` initialized to `false` and only flipped to `true` upon receiving `re.APP_LOADED`.
+2. **Unhandled TypeError in TopScene Resizing**: `hq.syncBeeCameraFrustum()` attempted to read `.scale` from `this._beeBackgroundMesh` during `ne.emit(re.RESIZE)`. Because `this._beeBackgroundMesh` is instantiated only during `onAppLoaded()`, calling resize prematurely threw `TypeError: Cannot read properties of undefined (reading 'scale')`, causing an unhandled rejection that halted execution before `re.APP_LOADED` could fire.
+3. **Unprotected WebGL Preloading**: In `async load()`, asset preloading (`await BO(...)`, Draco, KTX2 WebWorkers, and GLB parsing) lacked error handling or progress timeouts. On single-threaded local servers like Python `http.server`, sequential asset requests or WebWorker stalls caused the preloader to hang indefinitely.
+4. **Missing Camera Null Guards**: `setModelCameraFov` and `hide` called `.getObjectByName("camera")` on `assetsManager.get("homeModel")` without null-checks, risking fatal TypeErrors if `HomeView` mounted before 3D models finished downloading.
+
+### Implementation Details
+1. **Backup Created**: Full pre-fix backup saved to `_backup_pre_fix_20261109/`.
+2. **Defensive Camera & Scene Guards**:
+   - Guarded `setModelCameraFov(e)` and `hide(e)` in `assets/index-djk_Apyr.js` with null-checks verifying `assetsManager.get(e + "Model")` before reading camera properties.
+   - Wrapped `HomeView` and `AboutView` mounting hooks (`a` function) with try/catch to ensure scroll resets, `QV` measurements, and cursor indicators run independently of 3D state.
+3. **TopScene Null Guard**:
+   - Added `if (!this._beeBackgroundMesh) return;` to `hq.syncBeeCameraFrustum()`, eliminating the unhandled TypeError.
+4. **Progress-Monitored Lifecycle & Asynchronous Background Hydration**:
+   - Structured `async load()` with an active `re.LOADER_PROGRESS` watcher.
+   - If progress stalls or loading takes longer than 2.2 seconds, the safety watchdog gracefully marks `window.__DEEPIKA_3D_STATUS.state = "HYDRATING"` and emits `re.APP_LOADED`, unlocking the complete DOM content (Hero, 5 Projects, Internship, Skills) without waiting on 3D textures.
+   - When background 3D compilation completes, it smoothly connects to `#webgl-app` without reloading or shifting the layout.
+   - If WebGL throws or is unsupported, it catches the error, marks `state = "FALLBACK_2D"`, and completes page reveal in high-performance 2D canvas mode.
+5. **Loader Dismissal Failsafe**:
+   - Added `initLoaderSafetyWatcher()` to `assets/portfolio-interactive.js` to ensure `.loaderBlock` transitions away cleanly (`translateY(-100%)`, `opacity: 0`).
+
+### Verification & Test Results
+- **Syntax Check**: `node -c assets/index-djk_Apyr.js` and `node -c assets/portfolio-interactive.js` passed with code 0.
+- **Console Log Verification**: Executed headless browser diagnostic against `http://127.0.0.1:8011/`. Diagnostic error log confirmed **zero unhandled exceptions** (`[]`).
+- **DOM & Content Verification**: Confirmed that `Deepika V`, `9.29 CGPA`, `JNNCE`, `Future Interns`, and all five software projects (`MindVault`, `Multi Vault`, `Campus Placement Management System`, `Heart Disease Prediction`, `Code Debug Game`) render properly.
+- **Local Git Safety**: Changes kept strictly local; **no push to GitHub executed**.

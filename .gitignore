@@ -30,3 +30,9 @@ deepika_template/
 _backup_MyPortfolio_v1/
 
 _backup_MyPortfolio_v2/
+
+# Local diagnostics and backups
+scratch/
+_backup_pre_fix_20261109/
+check_all_assets.js
+find_home_model.js
