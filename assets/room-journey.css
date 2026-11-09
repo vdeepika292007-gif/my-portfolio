@@ -1,0 +1,28 @@
+:root[data-journey-enabled=true][data-palette=home] .page .headerBlock{height:520dvh;overflow:visible}
+:root[data-journey-enabled=true][data-palette=home] .page .headerBlock__content{position:fixed;left:clamp(30px,17.85vw,300px);bottom:48px;margin:0;transform:none!important;opacity:var(--journey-copy-opacity,1)!important;z-index:10;visibility:hidden;transition:visibility 0s}
+:root[data-journey-enabled=true][data-palette=home][data-room-hero=true] .page .headerBlock__content{visibility:visible}
+.room-journey-hud{position:fixed;z-index:75;left:50%;bottom:29px;transform:translateX(-50%);display:grid;grid-template-columns:minmax(170px,250px) auto;gap:7px 23px;color:#304039;font:12px/1.3 Arial,sans-serif;opacity:var(--journey-hud-opacity,1);pointer-events:none}
+.room-journey-hud[hidden]{display:none}
+.room-journey-hud__copy{display:flex;gap:12px;align-items:center;white-space:nowrap}
+.room-journey-hud__number{font-size:9px;letter-spacing:.08em;opacity:.65}
+.room-journey-hud__track{height:2px;background:#30403925;grid-column:1;overflow:hidden}
+.room-journey-hud__track span{display:block;height:100%;background:currentColor;transform-origin:left;transform:scaleX(0)}
+.room-journey-hud button{pointer-events:auto;grid-column:2;grid-row:1/3;align-self:center;padding:9px 12px;border:1px solid #30403940;border-radius:20px;background:#f6f1e4e0;color:inherit;font:inherit;white-space:nowrap;cursor:pointer}
+.room-journey-hud button:focus-visible{outline:2px solid #a77b3b;outline-offset:3px}
+:root[data-room-lighting=dark] .room-journey-hud{color:#eadcbf}
+:root[data-room-lighting=dark] .room-journey-hud__track{background:#eadcbf30}
+:root[data-room-lighting=dark] .room-journey-hud button{border-color:#eadcbf40;background:#17232de0}
+:root[data-journey-stage=portal] .room-lighting,:root[data-journey-stage=portfolio] .room-lighting{display:none}
+@media(max-width:600px){
+ :root[data-journey-enabled=true][data-palette=home] .page .headerBlock{height:480dvh}
+ :root[data-journey-enabled=true][data-palette=home] .page .headerBlock__content{left:24px;bottom:68px;width:min(260px,76vw)}
+ .room-journey-hud{bottom:23px;width:calc(100% - 36px);grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;font-size:11px}
+ .room-journey-hud__copy{white-space:normal;gap:7px}.room-journey-hud__number{font-size:8px}.room-journey-hud button{padding:9px 10px;font-size:10px}
+}
+/* Keep the pendant bulbs and the clock unobstructed during the room tour. */
+@media(min-width:601px){.room-lighting{top:auto;bottom:28px}.room-journey-hud{left:55%}}
+
+:root[data-journey-stage]:not([data-journey-stage=studio]):not([data-journey-stage=off]) .cursorIndication{visibility:hidden!important}
+
+/* The controls leave before the screen opens. */
+.room-lighting{opacity:var(--journey-controls-opacity,1)}

@@ -1,13 +1,18 @@
 /**
  * ==========================================================================
- * Deepika V - Portfolio (Vanilla JavaScript)
- * Interactive Controllers: Theme Switcher, Heart Disease ML Simulator,
- * Code Debug Game with Animated Buggy Mascot, Filters, and Modals.
+ * Deepika V - Personal Portfolio Website (Vanilla JavaScript)
+ * Interactive Studio Edition
+ * Inspired by: Sunroom — Orbital Atelier
+ * Stack: HTML5, CSS3, Vanilla JS, Bootstrap 5.3 (Zero build tools)
  * ==========================================================================
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
+  initRoomLightingController();
+  initMechanicalClock();
+  initSoundController();
+  initRoomJourneyHUD();
+  initPaletteObserver();
   initHeartDiseaseSimulator();
   initCodeDebugGame();
   initSkillsFilter();
@@ -17,23 +22,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. DARK / LIGHT THEME TOGGLE
+   1. 3-MODE ROOM LIGHTING CONTROLLER (AUTO / LIGHT / DARK)
    ========================================================================== */
-function initTheme() {
+function initRoomLightingController() {
+  const root = document.documentElement;
+  const pillBtns = document.querySelectorAll('[data-lighting-mode]');
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeIcon = document.getElementById('themeIcon');
+  const clockBadge = document.getElementById('navbarClockTime');
 
-  function getPreferredTheme() {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  function getAutoLightingTheme() {
+    const hours = new Date().getHours();
+    // Daylight between 06:00 and 18:00
+    return (hours >= 6 && hours < 18) ? 'light' : 'dark';
   }
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-bs-theme', theme);
-    localStorage.setItem('theme', theme);
+  function getSavedMode() {
+    return localStorage.getItem('portfolio-lighting-mode') || 'auto';
+  }
+
+  function applyLighting(mode) {
+    let effectiveTheme = mode;
+    if (mode === 'auto') {
+      effectiveTheme = getAutoLightingTheme();
+    }
+
+    root.setAttribute('data-bs-theme', effectiveTheme);
+    root.dataset.roomLighting = effectiveTheme;
+    localStorage.setItem('portfolio-lighting-mode', mode);
+
+    // Update Pill Buttons
+    pillBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lighting-mode') === mode);
+    });
+
+    // Update legacy icon if present
     if (themeIcon) {
-      if (theme === 'dark') {
+      if (effectiveTheme === 'dark') {
         themeIcon.className = 'bi bi-sun-fill text-warning';
       } else {
         themeIcon.className = 'bi bi-moon-fill text-secondary';
@@ -41,20 +66,260 @@ function initTheme() {
     }
   }
 
-  // Initial theme
-  applyTheme(getPreferredTheme());
+  // Bind Mode Buttons
+  pillBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const mode = e.currentTarget.getAttribute('data-lighting-mode');
+      applyLighting(mode);
+      if (window.playTickSound) window.playTickSound(440, 0.04);
+    });
+  });
 
+  // Legacy Toggle Button Support
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-bs-theme');
+      const current = root.getAttribute('data-bs-theme');
       const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
+      applyLighting(next);
+      if (window.playTickSound) window.playTickSound(440, 0.04);
     });
   }
+
+  // Periodic Auto-check (e.g. at sunset or when tab refocuses)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && getSavedMode() === 'auto') {
+      applyLighting('auto');
+    }
+  });
+
+  // Initial Load
+  applyLighting(getSavedMode());
 }
 
 /* ==========================================================================
-   2. HEART DISEASE MACHINE LEARNING PREDICTOR
+   2. MECHANICAL ANALOG CLOCK & LIVE TIMEZONE READOUT
+   ========================================================================== */
+function initMechanicalClock() {
+  const hourHand = document.getElementById('clockHandHour');
+  const minuteHand = document.getElementById('clockHandMinute');
+  const secondHand = document.getElementById('clockHandSecond');
+  const digitalReadout = document.getElementById('clockDigitalTime');
+  const navbarClock = document.getElementById('navbarClockTime');
+
+  // Detect local timezone abbreviation
+  let tzAbbr = 'Local';
+  try {
+    const tzString = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const parts = new Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).formatToParts(new Date());
+    const tzPart = parts.find(p => p.type === 'timeZoneName');
+    if (tzPart) tzAbbr = tzPart.value;
+    else tzAbbr = tzString.split('/').pop().replace(/_/g, ' ');
+  } catch (e) {
+    tzAbbr = 'Time';
+  }
+
+  function updateClock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const millis = now.getMilliseconds();
+
+    // High precision angles for smooth motion
+    const secondAngle = (seconds + millis / 1000) * 6; // 360 / 60
+    const minuteAngle = (minutes + seconds / 60) * 6;  // 360 / 60
+    const hourAngle = ((hours % 12) + minutes / 60) * 30; // 360 / 12
+
+    if (secondHand) secondHand.style.transform = `rotate(${secondAngle}deg)`;
+    if (minuteHand) minuteHand.style.transform = `rotate(${minuteAngle}deg)`;
+    if (hourHand) hourHand.style.transform = `rotate(${hourAngle}deg)`;
+
+    // Digital format: hh:mm:ss AM/PM
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    const displayMinutes = String(minutes).padStart(2, '0');
+    const displaySeconds = String(seconds).padStart(2, '0');
+    const timeString = `${displayHours}:${displayMinutes}:${displaySeconds} ${ampm} ${tzAbbr}`;
+
+    if (digitalReadout) digitalReadout.textContent = timeString;
+    if (navbarClock) navbarClock.textContent = `${displayHours}:${displayMinutes} ${ampm} ${tzAbbr}`;
+
+    requestAnimationFrame(updateClock);
+  }
+
+  requestAnimationFrame(updateClock);
+}
+
+/* ==========================================================================
+   3. WEB AUDIO CONTROLLER (ANIMATED SOUND WAVES & ACOUSTIC TICKS)
+   ========================================================================== */
+function initSoundController() {
+  const soundBtn = document.getElementById('soundToggleBtn');
+  let audioCtx = null;
+  let isSoundEnabled = localStorage.getItem('portfolio-sound-enabled') === 'true';
+
+  function updateBtnUI() {
+    if (soundBtn) {
+      soundBtn.classList.toggle('active', isSoundEnabled);
+      soundBtn.setAttribute('title', isSoundEnabled ? 'Sound is ON (Click to mute)' : 'Sound is OFF (Click to unmute)');
+      soundBtn.setAttribute('aria-label', isSoundEnabled ? 'Mute acoustic audio feedback' : 'Enable acoustic audio feedback');
+    }
+  }
+
+  // Synthesized acoustic click using native Web Audio API
+  window.playTickSound = function(frequency = 520, duration = 0.035, type = 'sine') {
+    if (!isSoundEnabled) return;
+    try {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      // AudioContext fallback
+    }
+  };
+
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      isSoundEnabled = !isSoundEnabled;
+      localStorage.setItem('portfolio-sound-enabled', String(isSoundEnabled));
+      updateBtnUI();
+      if (isSoundEnabled) {
+        window.playTickSound(680, 0.05);
+      }
+    });
+  }
+
+  // Play subtle feedback on primary button clicks
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('button, .nav-link, .btn, [role="button"]');
+    if (target && isSoundEnabled && target !== soundBtn) {
+      window.playTickSound(480, 0.03);
+    }
+  });
+
+  updateBtnUI();
+}
+
+/* ==========================================================================
+   4. SOFA-TO-TV TOUR JOURNEY HUD & SKIP CONTROLLER
+   ========================================================================== */
+function initRoomJourneyHUD() {
+  const hud = document.getElementById('roomJourneyHud');
+  const stageNum = document.getElementById('journeyStageNum');
+  const stageTitle = document.getElementById('journeyStageTitle');
+  const progressBar = document.getElementById('journeyProgressBar');
+  const skipBtn = document.getElementById('journeySkipBtn');
+  const heroSection = document.getElementById('hero');
+
+  if (!hud || !heroSection) return;
+
+  const stages = [
+    { num: '01 / 04', title: 'The Studio — Orbital Atelier', threshold: 0.15 },
+    { num: '02 / 04', title: 'Make Yourself Comfortable', threshold: 0.45 },
+    { num: '03 / 04', title: 'Your View from the Sofa', threshold: 0.75 },
+    { num: '04 / 04', title: 'Step Inside the Portfolio', threshold: 1.0 }
+  ];
+
+  function updateJourney() {
+    const heroRect = heroSection.getBoundingClientRect();
+    const heroHeight = heroSection.offsetHeight;
+    const scrolled = -heroRect.top;
+    const progress = Math.max(0, Math.min(1, scrolled / (heroHeight * 0.75)));
+
+    // Update progress bar
+    if (progressBar) {
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    // Determine current stage
+    let currentStage = stages[0];
+    for (let i = 0; i < stages.length; i++) {
+      if (progress >= (stages[i - 1]?.threshold || 0) && progress <= stages[i].threshold) {
+        currentStage = stages[i];
+        break;
+      }
+    }
+    if (progress >= 0.8) currentStage = stages[3];
+
+    if (stageNum) stageNum.textContent = currentStage.num;
+    if (stageTitle) stageTitle.textContent = currentStage.title;
+
+    // Hide HUD once deep in content
+    if (heroRect.bottom < 100) {
+      hud.style.opacity = '0';
+      hud.style.pointerEvents = 'none';
+      hud.style.transform = 'translate(-50%, 20px)';
+    } else {
+      hud.style.opacity = '1';
+      hud.style.pointerEvents = 'auto';
+      hud.style.transform = 'translate(-50%, 0)';
+    }
+  }
+
+  window.addEventListener('scroll', updateJourney, { passive: true });
+  window.addEventListener('resize', updateJourney, { passive: true });
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(skipBtn.getAttribute('href') || '#interactive-lab');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  updateJourney();
+}
+
+/* ==========================================================================
+   5. ROUTE / SECTION PALETTE SHIFTER (AURORA ATMOSPHERE)
+   ========================================================================== */
+function initPaletteObserver() {
+  const root = document.documentElement;
+  const sections = [
+    { id: 'hero', palette: 'home' },
+    { id: 'interactive-lab', palette: 'playground' },
+    { id: 'about', palette: 'about' },
+    { id: 'skills', palette: 'home' },
+    { id: 'projects', palette: 'playground' },
+    { id: 'experience', palette: 'about' },
+    { id: 'education', palette: 'about' },
+    { id: 'contact', palette: 'home' }
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const match = sections.find(s => s.id === entry.target.id);
+        if (match) {
+          root.dataset.palette = match.palette;
+        }
+      }
+    });
+  }, { threshold: 0.25 });
+
+  sections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+}
+
+/* ==========================================================================
+   6. HEART DISEASE MACHINE LEARNING PREDICTOR
    ========================================================================== */
 function initHeartDiseaseSimulator() {
   const ageSlider = document.getElementById('ageSlider');
@@ -88,7 +353,7 @@ function initHeartDiseaseSimulator() {
     const chol = Number(cholSlider.value);
     const hr = Number(hrSlider.value);
 
-    // Update labels
+    // Update numeric labels
     if (ageVal) ageVal.textContent = `${age} Years`;
     if (bpVal) bpVal.textContent = `${bp} mm Hg`;
     if (cholVal) cholVal.textContent = `${chol} mg/dL`;
@@ -271,7 +536,7 @@ function initHeartDiseaseSimulator() {
 }
 
 /* ==========================================================================
-   3. CODE DEBUG GAME (ANIMATED BUGGY MASCOT & LIVE TEST RUNNER)
+   7. CODE DEBUG GAME (ANIMATED BUGGY MASCOT & LIVE TEST RUNNER)
    ========================================================================== */
 function initCodeDebugGame() {
   const challenges = [
@@ -322,40 +587,40 @@ function initCodeDebugGame() {
     {
       id: 3,
       title: 'Challenge 03: React State Immutability Bug',
-      language: 'TypeScript',
-      difficulty: 'Medium',
-      fileName: 'todo_state.tsx',
-      bugDescription: 'Direct array mutation (todos.push) prevents React from detecting state change, so UI never re-renders.',
-      hint: 'React state must be treated as immutable. You should never modify an array in place with .push()!',
-      buggyCodeRaw: '  todos.push(newItem); // Bug: Mutating state directly!',
-      patchedCodeRaw: '  setTodos([...todos, newItem]); // Correct: Immutable copy',
-      codeSnippet: `function addTodo(newItem) {\n  // Direct mutation bug:\n  todos.push(newItem); // React state reference unchanged!\n  setTodos(todos);\n}`,
+      language: 'JavaScript / React',
+      difficulty: 'Hard',
+      fileName: 'UserList.jsx',
+      bugDescription: 'Mutating array state in-place with userList.push() does not trigger component re-render.',
+      hint: 'React state must be treated as immutable. Use the spread operator to create a new array reference.',
+      buggyCodeRaw: '    userList.push(newUser); // Bug: Direct state mutation!',
+      patchedCodeRaw: '    setUserList([...userList, newUser]); // Correct: New array reference',
+      codeSnippet: `function addUser(newUser) {\n  // Bug: Direct mutation prevents re-render:\n  userList.push(newUser);\n  setUserList(userList);\n}`,
       options: [
-        { id: 'A', text: "Use todos.concat() without calling setTodos", isCorrect: false, feedback: "Incorrect. State must always be updated through setter." },
-        { id: 'B', text: "Create a new array: setTodos([...todos, newItem])", isCorrect: true, feedback: "Perfect! Spread operator creates a fresh array reference, prompting React to re-render." },
-        { id: 'C', text: "Change newItem to a string before pushing", isCorrect: false, feedback: "Incorrect. Data type is not the re-render issue." }
+        { id: 'A', text: "Call userList.concat() without setter", isCorrect: false, feedback: "Incorrect. Without setUserList, state doesn't update." },
+        { id: 'B', text: "Use setUserList([...userList, newUser])", isCorrect: true, feedback: "Bingo! Spreading into a new array reference allows React to detect state changes." },
+        { id: 'C', text: "Wrap inside setTimeout()", isCorrect: false, feedback: "Incorrect. Timing does not solve reference equality checks." }
       ],
       testCases: [
-        { name: 'Test 1', input: 'addTodo("Study Data Structures")', expected: 'rerendered: true', runMs: '3.2ms' },
-        { name: 'Test 2', input: 'todos.length checks', expected: 'length + 1', runMs: '1.0ms' },
-        { name: 'Test 3', input: 'State reference equality', expected: 'prev !== next', runMs: '0.7ms' }
+        { name: 'Test 1', input: 'addUser({ name: "Alex" })', expected: 'length === 1', runMs: '1.8ms' },
+        { name: 'Test 2', input: 'Virtual DOM Diff', expected: 'Re-rendered', runMs: '2.4ms' },
+        { name: 'Test 3', input: 'Prev State Identity', expected: 'prev !== next', runMs: '0.7ms' }
       ]
     }
   ];
 
   let currentIdx = 0;
-  let score = 150;
-  let streak = 1;
   let viewMode = 'editor';
+  let xp = 150;
+  let streak = 1;
 
-  const bugMascotBtn = document.getElementById('bugMascotBtn');
-  const bugSpeech = document.getElementById('bugSpeech');
   const codeContent = document.getElementById('codeContent');
   const codeFileName = document.getElementById('codeFileName');
   const bugContext = document.getElementById('bugContext');
   const hintText = document.getElementById('hintText');
   const hintBox = document.getElementById('hintBox');
   const toggleHintBtn = document.getElementById('toggleHintBtn');
+  const bugSpeech = document.getElementById('bugSpeech');
+  const bugMascotBtn = document.getElementById('bugMascotBtn');
   const optionsContainer = document.getElementById('optionsContainer');
   const testResultsContainer = document.getElementById('testResultsContainer');
   const nextChallengeBtn = document.getElementById('nextChallengeBtn');
@@ -370,7 +635,6 @@ function initCodeDebugGame() {
     currentIdx = index;
     const c = challenges[currentIdx];
 
-    // Update titles and files
     document.getElementById('challengeTitle').textContent = c.title;
     document.getElementById('challengeMeta').textContent = `${c.language} • ${c.difficulty}`;
     if (codeFileName) codeFileName.textContent = c.fileName;
@@ -378,13 +642,10 @@ function initCodeDebugGame() {
     if (hintText) hintText.textContent = c.hint;
     if (hintBox) hintBox.classList.add('d-none');
 
-    // Bug speech reset
     if (bugSpeech) bugSpeech.textContent = "Hey! I broke this code! Can you spot my bug?";
 
-    // Render code according to view mode
     renderCode();
 
-    // Render options
     if (optionsContainer) {
       optionsContainer.innerHTML = '';
       c.options.forEach(opt => {
@@ -396,7 +657,6 @@ function initCodeDebugGame() {
       });
     }
 
-    // Render tests in ready state
     renderTests('idle');
   }
 
@@ -438,27 +698,26 @@ function initCodeDebugGame() {
         div.className += ' bg-info-subtle text-info border-info-subtle';
         div.innerHTML = `<span>${tc.name}: ${escapeHtml(tc.input)}</span> <span class="spinner-border spinner-border-sm"></span>`;
       } else {
-        div.className += ' bg-body text-secondary border-secondary-subtle';
-        div.innerHTML = `<span>${tc.name}: ${escapeHtml(tc.input)}</span> <span>➜ ${escapeHtml(tc.expected)}</span>`;
+        div.className += ' bg-body-tertiary text-secondary';
+        div.innerHTML = `<span>${tc.name}: ${escapeHtml(tc.input)}</span> <span class="badge bg-secondary">Awaiting run</span>`;
       }
-
       testResultsContainer.appendChild(div);
     });
   }
 
   function handleSelectOption(opt) {
     renderTests('running');
+    if (bugSpeech) bugSpeech.textContent = "Running automated test suite in sandbox...";
 
     setTimeout(() => {
       if (opt.isCorrect) {
         renderTests('pass');
-        score += 50;
+        xp += 50;
         streak += 1;
-        if (scoreBadge) scoreBadge.textContent = `XP: ${score}`;
+        if (scoreBadge) scoreBadge.textContent = `XP: ${xp}`;
         if (streakBadge) streakBadge.textContent = `Streak: ${streak}x`;
-        if (bugSpeech) bugSpeech.textContent = "Aargh! You squashed me! All tests passed! 🎉";
+        if (bugSpeech) bugSpeech.textContent = "Curse you, clever developer! You fixed my bug!";
 
-        // Show floating XP
         if (xpFloatingPopup) {
           xpFloatingPopup.classList.remove('d-none');
           xpFloatingPopup.classList.add('animate-float-xp');
@@ -473,10 +732,9 @@ function initCodeDebugGame() {
         if (streakBadge) streakBadge.textContent = `Streak: ${streak}x`;
         if (bugSpeech) bugSpeech.textContent = "Haha! Nice try! Unit tests are still failing!";
       }
-    }, 600);
+    }, 550);
   }
 
-  // Bug click reaction
   if (bugMascotBtn) {
     bugMascotBtn.addEventListener('click', () => {
       const taunts = [
@@ -491,14 +749,12 @@ function initCodeDebugGame() {
     });
   }
 
-  // Hint toggle
   if (toggleHintBtn) {
     toggleHintBtn.addEventListener('click', () => {
       if (hintBox) hintBox.classList.toggle('d-none');
     });
   }
 
-  // View mode toggles
   document.querySelectorAll('[data-code-view]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       document.querySelectorAll('[data-code-view]').forEach(b => b.classList.remove('active', 'btn-secondary'));
@@ -508,21 +764,18 @@ function initCodeDebugGame() {
     });
   });
 
-  // Next Challenge
   if (nextChallengeBtn) {
     nextChallengeBtn.addEventListener('click', () => {
       loadChallenge((currentIdx + 1) % challenges.length);
     });
   }
 
-  // Reset
   if (resetChallengeBtn) {
     resetChallengeBtn.addEventListener('click', () => {
       loadChallenge(currentIdx);
     });
   }
 
-  // Level selector buttons
   document.querySelectorAll('[data-challenge-idx]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const idx = Number(e.currentTarget.getAttribute('data-challenge-idx'));
@@ -539,7 +792,7 @@ function escapeHtml(text) {
 }
 
 /* ==========================================================================
-   4. SKILLS FILTER
+   8. SKILLS CATEGORY FILTER
    ========================================================================== */
 function initSkillsFilter() {
   const filterBtns = document.querySelectorAll('[data-skill-filter]');
@@ -547,7 +800,7 @@ function initSkillsFilter() {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      filterBtns.forEach(b => b.classList.remove('active', 'btn-dark', 'btn-light'));
+      filterBtns.forEach(b => b.classList.remove('active', 'btn-teal', 'text-white'));
       const target = e.currentTarget;
       target.classList.add('active');
 
@@ -564,7 +817,7 @@ function initSkillsFilter() {
 }
 
 /* ==========================================================================
-   5. PROJECTS FILTER
+   9. FEATURED PROJECTS FILTER
    ========================================================================== */
 function initProjectsFilter() {
   const filterBtns = document.querySelectorAll('[data-project-filter]');
@@ -572,7 +825,7 @@ function initProjectsFilter() {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      filterBtns.forEach(b => b.classList.remove('active', 'btn-dark', 'btn-light'));
+      filterBtns.forEach(b => b.classList.remove('active', 'btn-teal', 'text-white'));
       const target = e.currentTarget;
       target.classList.add('active');
 
@@ -589,7 +842,7 @@ function initProjectsFilter() {
 }
 
 /* ==========================================================================
-   6. CONTACT FORM & EMAIL COPY
+   10. CONTACT FORM & ONE-CLICK EMAIL COPY
    ========================================================================== */
 function initContactForm() {
   const contactForm = document.getElementById('contactForm');
@@ -620,7 +873,7 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   7. SCROLL SPY & BACK TO TOP
+   11. SCROLL SPY & BACK TO TOP BUTTON
    ========================================================================== */
 function initScrollSpy() {
   const backToTopBtn = document.getElementById('backToTopBtn');
@@ -631,7 +884,7 @@ function initScrollSpy() {
     } else {
       if (backToTopBtn) backToTopBtn.classList.remove('show');
     }
-  });
+  }, { passive: true });
 
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {

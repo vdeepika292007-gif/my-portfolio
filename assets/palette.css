@@ -1,0 +1,81 @@
+/* Aurora studio — original color layer, separate from the reference styles. */
+:root {
+  --aurora-ink: #29213e;
+  --aurora-paper: #f0e6fa;
+  --aurora-coral: #ffbdab;
+  --aurora-aqua: #ade4df;
+  --aurora-work: radial-gradient(ellipse at 0% 10%, #d2e9ed 0, transparent 60%), linear-gradient(125deg, #e6dcf6, #f2e5f3 56%, #ffdacb);
+  --aurora-play: radial-gradient(ellipse at 0% 10%, #aee8e2 0, transparent 65%), linear-gradient(130deg, #d9c6fb, #d5dcfb 55%, #ffc8b3);
+  --aurora-dusk: radial-gradient(ellipse at 0% 0%, #235a65 0, transparent 65%), linear-gradient(125deg, #282345, #3c2b5b 65%, #5b304f);
+}
+/* These pseudo-elements tint the scene edges. The center stays soft and neutral,
+   and the treatment fades away before any project image enters the viewport. */
+#webgl-app::before,
+#webgl-app::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--scene-color-strength, 0);
+}
+#webgl-app::after {
+  z-index: 2;
+  background: linear-gradient(125deg, #8e72f5 0%, #b3a1ef 30%, #f2b0a2 73%, #ffd7ad 100%);
+  mix-blend-mode: color;
+  mask-image: radial-gradient(ellipse at 51% 40%, transparent 8%, #000b 32%, #000 70%);
+}
+#webgl-app::before {
+  z-index: 3;
+  background: linear-gradient(125deg, #9591ff66, #ffb89a33 70%, #d3f5eb55);
+  mix-blend-mode: soft-light;
+}
+:root[data-palette="about"] #webgl-app::after {
+  background: linear-gradient(125deg, #8574d9 0%, #b0c9f1 32%, #65c2c7 68%, #f7c4a0 100%);
+}
+:root .webglBg--home { background: var(--aurora-work); }
+:root .webglBg--about { background: var(--aurora-dusk); }
+:root .webglBg--playground { background: var(--aurora-play); }
+:root .footerBlock.white::before { background: var(--aurora-work); }
+:root .footerBlock.green::before { background: var(--aurora-dusk); }
+:root .footerBlock.yellow::before { background: var(--aurora-play); }
+:root .loaderBlock { background: var(--aurora-work); color: var(--aurora-ink); }
+:root .navbarBlock__menu { background: var(--aurora-work); }
+:root .cardBlock { background: #f5eefa; box-shadow: 0 24px 90px #2c1b5720; }
+:root .navbarBlock:not(.toggleColor):not(.forceWhite) { --navbar-fg: var(--aurora-ink); --navbar-sound-line: var(--aurora-ink); }
+:root .menuButton, :root .soundButton { background-color: #efe8f5; }
+@media (min-width: 501px) { :root .soundButton { background: transparent; } }
+:root .menuButton__cross { background: #ffd0bb; }
+:root .cursorIndication__text, :root .introBlock__bottom .bottom__showreelHint { background: var(--aurora-coral); color: var(--aurora-ink); }
+:root .beeTextIndication--theme-yellow .beeTextIndication__text { background: var(--aurora-aqua); color: var(--aurora-ink); }
+:root .beeTextIndication--theme-beige .beeTextIndication__text { background: #e2d5f5; }
+:root .cardBlock__content .content__jobs .jobs__job .job__current { background: #b9e8df; }
+:root .footerBlock__popup.white .popup__transitionWrapper--outer,
+:root .footerBlock__popup.green .popup__transitionWrapper--outer,
+:root .footerBlock__popup.yellow .popup__transitionWrapper--outer { background: var(--aurora-play); color: var(--aurora-ink); }
+::selection { background: #c5b0ee; color: #211734; }
+@media (prefers-reduced-motion: reduce) {
+  #webgl-app::before, #webgl-app::after { transition: none; }
+}
+
+/* Color now lives in the room's actual materials, including the flower.
+   No screen-wide tint obscures the flower's face or changes project media. */
+#webgl-app::before, #webgl-app::after { display: none; }
+
+/* A soft local light patch keeps the opening copy readable beside the new sofa. */
+:root .headerBlock__content::before {
+  background: none;
+}
+
+:root .headerBlock__content {
+  width: 280px;
+  padding: 17px 19px;
+  border: 1px solid #fff8eb99;
+  border-radius: 10px;
+  background: #f6f1e4df;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px #20282412;
+  text-shadow: none;
+}
+@media (max-width: 500px) {
+  :root .headerBlock__content { width: min(270px, 78vw); padding: 13px 16px; margin-bottom: 27px; }
+}

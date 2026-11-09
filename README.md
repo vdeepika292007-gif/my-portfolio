@@ -33,7 +33,7 @@ Live Website: **[https://vdeepika292007-gif.github.io/my-portfolio/](https://vde
    - **Heart Disease ML Risk Calculator**: Dynamic logistic regression probability calculation based on clinical metrics (Age, Blood Pressure, Cholesterol, Max Heart Rate, Chest Pain type, Exercise Angina) with circular SVG gauge, clinical zones, SHAP feature attributions, and one-click patient presets (Healthy vs. High Risk).
    - **Code Debug Game**: Interactive challenge runner with animated "Buggy" mascot, speech bubbles, real-time code vs. diff inspection, step-by-step test runner with latency timings, and floating XP points.
 4. **About Me**:
-   - Academic narrative, key metrics (9.29 CGPA, 5th Sem, ISTE Vice-Chairperson, Class of 2028), and academic history.
+   - Academic narrative, key metrics (9.29 CGPA, 5th Sem, Student Office Bearer as ISTE Vice-Chairperson, Class of 2028), and academic history.
 5. **Technical Skills**:
    - Categorized by Languages, Web Development, Machine Learning & Data, Tools & Platforms, and Databases.
    - Dynamic tab filtering (*All*, *Languages*, *Web*, *Data & ML*, *Tools*).

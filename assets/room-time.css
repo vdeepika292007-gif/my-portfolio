@@ -1,0 +1,24 @@
+.room-lighting{position:fixed;right:30px;top:88px;z-index:80;width:226px;padding:12px;border:1px solid #f3efe6b0;border-radius:13px;background:#f4f0e6e8;color:#303a35;box-shadow:0 8px 28px #15231c1c;backdrop-filter:blur(12px);font:12px/1.3 Arial,sans-serif;pointer-events:auto}
+.room-lighting[hidden]{display:none}
+.room-lighting__heading,.room-lighting__clock{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.room-lighting__heading{font-size:11px;margin-bottom:9px}
+.room-lighting__state{font-size:10px;opacity:.68}
+.room-lighting__switch{display:flex;gap:3px;padding:3px;background:#333e3510;border-radius:8px}
+.room-lighting__switch button{display:flex;align-items:center;justify-content:center;gap:4px;flex:1;min-height:31px;padding:5px 7px;border:0;border-radius:6px;background:transparent;color:inherit;cursor:pointer;font:inherit}
+.room-lighting__switch button[aria-pressed=true]{background:#fffdf6;box-shadow:0 1px 5px #2222}
+.room-lighting__switch button:focus-visible{outline:2px solid #b17d35;outline-offset:2px}
+.room-lighting__switch svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.room-lighting__clock{margin-top:10px;font-size:10px;color:#536157}
+.room-lighting__clock time{font-size:12px;font-variant-numeric:tabular-nums;letter-spacing:.08em;color:inherit}
+:root[data-room-lighting=dark] .room-lighting{background:#17222bf0;color:#eee1bf;border-color:#e6c49135;box-shadow:0 8px 30px #0005}
+:root[data-room-lighting=dark] .room-lighting__switch{background:#070d154a}
+:root[data-room-lighting=dark] .room-lighting__switch button[aria-pressed=true]{background:#c99c552b;box-shadow:inset 0 0 0 1px #e7c17b52}
+:root[data-room-lighting=dark] .room-lighting__clock{color:#b2bdc1}
+:root[data-room-lighting=dark][data-room-hero=true] .headerBlock__content{background:#16232bdc;border-color:#d7c29a40;color:#f2e4c6;box-shadow:0 12px 40px #0003}
+:root[data-room-lighting=dark][data-room-hero=true] .navbarBlock{--navbar-fg:#eee1c5;--navbar-sound-line:#eee1c5}
+:root[data-room-lighting=dark][data-room-hero=true] .menuButton,:root[data-room-lighting=dark][data-room-hero=true] .soundButton{background-color:#29343d;color:#eee1c5}
+@media(min-width:501px){:root[data-room-lighting=dark][data-room-hero=true] .soundButton{background:transparent}}
+@media(max-width:600px){.room-lighting{right:16px;top:96px;width:205px;padding:10px}.room-lighting__switch button{min-height:30px;padding:4px 5px}}
+:root[data-room-lighting=dark][data-room-hero=true] .soundButton__line{background:#eee1c5!important}
+:root[data-room-lighting=dark][data-room-hero=true] .menuButton__default .default__line,:root[data-room-lighting=dark][data-room-hero=true] .menuButton__cross .cross__line{stroke:#eee1c5!important}
+:root[data-room-lighting=dark][data-room-hero=true] .menuButton__cross{background:#43515b}

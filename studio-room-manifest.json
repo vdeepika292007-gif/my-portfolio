@@ -1,0 +1,61 @@
+{
+  "room": "Original procedural Orbital Atelier",
+  "source": "assets/studio-room.js",
+  "retained_flower": "assets/models/home/sunroom-flower.glb",
+  "flower_compressed_geometry_sha256": "b5d9cdeea98c83fa6d3555ab4ff23e67618d15f9736f303045e8559ca596c6f7",
+  "flower_geometry_bytes_unchanged": true,
+  "original_room_meshes_in_active_model": false,
+  "camera_paths_modified": true,
+  "camera_controller_sha256": "cf882ba84bc37596d86ac8a8811eca2b43840ee7641de677a1e111faadb2dbe0",
+  "flower_material_shader_unchanged": true,
+  "room_materials": "Neutral linen, woven throw, fine-grain oak, brushed bronze, honed limestone and paper-matted landscape",
+  "lighting": "Window daylight with restrained cool fill and warm bounce; linen-shade practical lamp; neutral prefiltered reflections; cast and contact shadows",
+  "camera_motion_unchanged": false,
+  "home_framing": {
+    "desktop_zoom_multiplier": 0.76,
+    "small_screen_zoom_multiplier": 0.48
+  },
+  "depth_of_field": {
+    "source": "assets/sunflower-lens.js",
+    "subject": "Unchanged complete sunflower mesh",
+    "background": "At most 0.8 CSS px, 35 percent blend; fades out through the sofa/TV sequence",
+    "ui": "Excluded from lens pass",
+    "sharp_clock": true
+  },
+  "furniture": "Crowned cushions and piping, draped throw, tapered oak writing desk, steel-frame upholstered chair",
+  "presentation": "Subtle original dust motion; reduced room-only film grain; original gradient sphere hidden",
+  "time_based_lighting": {
+    "default": "auto",
+    "day_local_hours": [
+      6,
+      18
+    ],
+    "manual_modes": [
+      "auto",
+      "light",
+      "dark"
+    ],
+    "persistence": "visitor localStorage",
+    "glow": "selective quarter-resolution bloom and warm point lights",
+    "clock": "Live local-time analog skeleton clock with smooth hands and animated gear train",
+    "hanging_bulbs": "Three emissive opal globes and a warm fill light"
+  },
+  "original_camera_controller_retained": true,
+  "home_scroll_journey": {
+    "source": "assets/room-journey.js",
+    "path": "assets/room-path.js",
+    "stages": [
+      "wide studio",
+      "approach sofa",
+      "sit",
+      "turn",
+      "TV gallery wall",
+      "enter TV",
+      "portfolio"
+    ],
+    "reversible": true,
+    "skip_control": true,
+    "both_lighting_modes": true,
+    "tv_entry": "Responsive screen-fit alignment, early type/control fade, safe stand-off and eased dissolve to native portfolio"
+  }
+}

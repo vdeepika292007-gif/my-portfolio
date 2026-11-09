@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+
+_backup_MyPortfolio/
+
+deepika_template/
+_backup_MyPortfolio_v1/
+
+_backup_MyPortfolio_v2/
