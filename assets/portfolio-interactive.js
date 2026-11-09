@@ -671,6 +671,50 @@ function enhanceProjects() {
       block.style.display = "none";
     }
   });
+  installProjectCarousel(projectBlocks, titleBlock);
+}
+
+function installProjectCarousel(blocks, titleBlock) {
+  if (!titleBlock || titleBlock.querySelector('.project-carousel')) return;
+  const cards = blocks.slice(0, 5).map(block => block._portfolioCard);
+  if (cards.some(card => !card)) return;
+  const carousel = document.createElement('section');
+  carousel.className = 'project-carousel';
+  carousel.setAttribute('aria-label', 'Featured projects');
+  carousel.innerHTML = `<div class="project-carousel__controls"><span>Explore the projects</span><div><button type="button" data-direction="-1" aria-label="Previous project">←</button><output aria-live="polite"></output><button type="button" data-direction="1" aria-label="Next project">→</button></div></div><div class="project-carousel__track" tabindex="0" role="region" aria-label="Project cards; use left and right arrow keys" data-lenis-prevent></div><div class="project-carousel__progress" aria-hidden="true"><span></span></div>`;
+  const track = carousel.querySelector('.project-carousel__track');
+  cards.forEach((card, index) => {
+    track.append(card);
+    blocks[index].classList.add(index === 0 ? 'project-carousel-host' : 'project-carousel-source');
+  });
+  blocks[0].closest('.wrapper')?.classList.add('project-carousel-layout');
+  titleBlock.append(carousel);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const visible = () => cards.filter(card => !card.hidden);
+  let active = 0, frame = 0;
+  function update() {
+    frame = 0;
+    const items = visible();
+    active = items.reduce((best, card, i) => Math.abs(card.offsetLeft - track.scrollLeft) < Math.abs(items[best].offsetLeft - track.scrollLeft) ? i : best, 0);
+    cards.forEach(card => card.classList.toggle('is-current', card === items[active]));
+    carousel.querySelector('output').textContent = items.length ? `${String(active + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}` : '0 / 0';
+    carousel.querySelector('[data-direction="-1"]').disabled = !items.length || active === 0;
+    carousel.querySelector('[data-direction="1"]').disabled = !items.length || active === items.length - 1;
+    carousel.querySelector('.project-carousel__progress span').style.transform = `scaleX(${items.length ? (active + 1) / items.length : 0})`;
+  }
+  function move(direction) {
+    const items = visible(), card = items[Math.max(0, Math.min(items.length - 1, active + direction))];
+    if (card) track.scrollTo({left: card.offsetLeft, behavior: reduced.matches ? 'instant' : 'smooth'});
+  }
+  carousel.querySelectorAll('[data-direction]').forEach(button => button.addEventListener('click', () => move(Number(button.dataset.direction))));
+  track.addEventListener('keydown', event => {
+    if (event.target !== track || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1);
+  });
+  track.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, {passive:true});
+  carousel.addEventListener('projects:filter', () => { track.scrollTo({left:0, behavior:'instant'}); update(); });
+  new ResizeObserver(update).observe(track);
+  update();
 }
 
 function setupInteractiveFiltersAndSearch(titleBlock, projectBlocks) {
@@ -733,7 +777,8 @@ function setupInteractiveFiltersAndSearch(titleBlock, projectBlocks) {
       }
 
       const isMatch = catMatch && searchMatch;
-      const card = block.querySelector(".deepika-project-card");
+      const card = block._portfolioCard || block.querySelector(".deepika-project-card");
+      if (card) card.hidden = !isMatch;
 
       if (isMatch) {
         matchCount++;
@@ -745,6 +790,10 @@ function setupInteractiveFiltersAndSearch(titleBlock, projectBlocks) {
         block.style.display = "none";
       }
     });
+
+    const host = document.querySelector(".project-carousel-host");
+    if (host) { host.classList.remove("deepika-project-hidden"); host.style.display = ""; }
+    document.querySelector(".project-carousel")?.dispatchEvent(new Event("projects:filter"));
 
     // Update clear button visibility
     if (clearBtn) {
@@ -845,7 +894,7 @@ function enhanceSingleProjectCard(block, idx) {
   if (!infoContainer) return;
 
   // Preserve cards, search state and handlers across unrelated DOM updates.
-  const existingCard = infoContainer.querySelector(".deepika-project-card");
+  const existingCard = block._portfolioCard || infoContainer.querySelector(".deepika-project-card");
   if (existingCard) return;
 
   const card = document.createElement("div");
@@ -959,6 +1008,7 @@ function enhanceSingleProjectCard(block, idx) {
   }
 
   infoContainer.appendChild(card);
+  if (card.classList.contains("deepika-project-card")) block._portfolioCard = card;
 }
 
 /**
@@ -1103,6 +1153,7 @@ function enhanceInternshipBlock(block) {
   }
 
   infoContainer.appendChild(card);
+  if (card.classList.contains("deepika-project-card")) block._portfolioCard = card;
 }
 
 /**

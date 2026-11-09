@@ -12,7 +12,7 @@ const root = path.resolve(__dirname, '..');
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'deepika-runtime-test-'));
 const browserPath = process.env.BROWSER_PATH || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.wasm': 'application/wasm', '.svg': 'image/svg+xml', '.json': 'application/json' };
-const fixture = `<!doctype html><div id="vue-app"></div>
+const fixture = `<!doctype html><link rel="stylesheet" href="./assets/portfolio-interactive.css"><div id="vue-app"></div>
 <script src="./assets/portfolio-interactive.js"></script>
 <script>
 window.mountFixture = () => {
@@ -97,6 +97,10 @@ async function until(expression, timeout = 45000) {
   await delay(400);
   assert.deepEqual(await evaluate('window.__observerLoops'), [], 'An observer repeatedly triggered itself during delayed mounting');
   assert.equal(await evaluate('document.querySelectorAll(".deepika-internship-card").length'), 1);
+  assert.equal(await evaluate('document.querySelector(".project-carousel__track").scrollWidth > document.querySelector(".project-carousel__track").clientWidth'), true, 'Projects must overflow horizontally');
+  await evaluate('document.querySelector(".project-carousel [data-direction=" + JSON.stringify("1") + "]").click()');
+  await until('document.querySelector(".project-carousel__track").scrollLeft > 100');
+  await evaluate('document.querySelector(".project-carousel__track").scrollTo({left:0,behavior:"instant"})');
   await evaluate('window.firstCard = document.querySelector(".deepika-project-card"); document.querySelector("#projectSearchInput").value = "MindVault"; document.querySelector("#projectSearchInput").dispatchEvent(new Event("input")); document.body.append(document.createElement("aside")); document.querySelector("#vue-app").append(document.createElement("span"));');
   await delay(300);
   assert.equal(await evaluate('window.firstCard === document.querySelector(".deepika-project-card")'), true, 'Unrelated changes must preserve cards and handlers');
@@ -106,6 +110,8 @@ async function until(expression, timeout = 45000) {
   await until('document.querySelectorAll(".deepika-project-card").length === 5 && !!document.querySelector(".navbar-clean-actions")');
   await delay(300);
   assert.deepEqual(await evaluate('window.__observerLoops'), [], 'Route remounting must not restart the loop');
+  await command('Emulation.setDeviceMetricsOverride', {width:390,height:844,deviceScaleFactor:1,mobile:true});
+  assert.equal(await evaluate('document.querySelector(".project-carousel__track").scrollWidth > document.querySelector(".project-carousel__track").clientWidth'), true, 'Mobile projects must remain horizontal');
   console.log('PASS: delayed mounting, stable cards, search, navigation controls and route remounting');
   if (process.argv.includes('--fixture-only')) return;
 

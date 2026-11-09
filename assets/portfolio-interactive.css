@@ -1558,3 +1558,30 @@
 
 /* Personal portfolio: omit template gallery frames and stock photos. */
 .projectBlock__slider, #vue-app img { display: none !important; }
+
+/* Native horizontal scrolling keeps swipe, trackpad and keyboard input fluid. */
+.project-carousel-source, .project-carousel-layout > :not(.projectBlock),
+.project-carousel-host > .projectBlock > .projectBlock__informations { display:none !important; }
+.project-carousel-host .projectBlock__title { max-width:1200px !important; width:100% !important; }
+.project-carousel { margin-top:32px; text-align:left; min-width:0; }
+.project-carousel__controls { display:flex; align-items:center; justify-content:space-between; gap:16px; color:#243b47; font:600 14px/1.4 'Space Grotesk',sans-serif; margin-bottom:20px; }
+.project-carousel__controls > div { display:flex; align-items:center; gap:16px; }
+.project-carousel__controls button { width:44px; height:44px; border:1px solid #b8c6d0; border-radius:50%; background:#f6f8fc; color:#243b47; font-size:22px; cursor:pointer; transition:background .2s, transform .2s; }
+.project-carousel__controls button:hover:not(:disabled) { background:#dddafa; transform:translateY(-2px); }
+.project-carousel__controls button:disabled { opacity:.35; cursor:default; }
+.project-carousel__controls output { min-width:58px; font-variant-numeric:tabular-nums; }
+.project-carousel__track { display:flex; align-items:stretch; gap:24px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; position:relative; padding:12px 8px 30px; scrollbar-width:thin; scrollbar-color:#8c85bc transparent; }
+.project-carousel__track:focus-visible { outline:3px solid #7770c7; outline-offset:5px; border-radius:20px; }
+.project-carousel__track > .deepika-project-card { flex:0 0 calc(100% - 56px); width:calc(100% - 56px) !important; margin:0 !important; scroll-snap-align:start; scroll-snap-stop:always; opacity:.65; transform:scale(.98); transition:opacity .45s ease, transform .45s ease, box-shadow .45s ease !important; }
+.project-carousel__track > .deepika-project-card.is-current { opacity:1; transform:scale(1); }
+.project-carousel__track > [hidden] { display:none !important; }
+.project-carousel__progress { height:3px; background:#d4dce5; border-radius:3px; overflow:hidden; margin-top:20px; }
+.project-carousel__progress span { display:block; width:100%; height:100%; background:linear-gradient(90deg,#3b8a90,#8b72c5); transform-origin:left; transition:transform .4s ease; }
+@media(max-width:640px) {
+  .project-carousel__track { gap:16px; }
+  .project-carousel__track > .deepika-project-card { flex-basis:calc(100% - 20px); width:calc(100% - 20px) !important; padding:22px 18px !important; }
+  .project-carousel__controls { font-size:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .project-carousel *, .project-carousel__track > .deepika-project-card { transition:none !important; scroll-behavior:auto !important; }
+}
