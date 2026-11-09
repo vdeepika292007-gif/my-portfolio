@@ -1555,3 +1555,6 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Personal portfolio: omit template gallery frames and stock photos. */
+.projectBlock__slider, #vue-app img { display: none !important; }
